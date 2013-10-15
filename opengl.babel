@@ -1,0 +1,8 @@
+[Package]
+name: "NAME"
+version: "VER"
+author: "FOO"
+description: "FOO"
+license: "MIT"
+
+srcDir: "src"
