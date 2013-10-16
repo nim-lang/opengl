@@ -1,7 +1,7 @@
 [Package]
 name: "opengl"
-version: "VER"
-author: "FOO"
+version: "1.0"
+author: "Andreas Rumpf"
 description: "High-level and low-level wrapper for OpenGL"
 license: "MIT"
 
