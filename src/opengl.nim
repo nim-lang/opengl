@@ -25,9 +25,11 @@ when defined(windows):
     ogldll* = "OpenGL32.dll"
     gludll* = "GLU32.dll"
 elif defined(macosx): 
+  #macosx has this notion of a framework, thus the path to the openGL dylib files
+  #is absolute
   const 
-    ogldll* = "libGL.dylib"
-    gludll* = "libGLU.dylib"
+    ogldll* = "/System/Library/Frameworks/OpenGL.framework/Versions/Current/Libraries/libGL.dylib"
+    gludll* = "/System/Library/Frameworks/OpenGL.framework/Versions/Current/Libraries/libGLU.dylib"
 else: 
   const 
     ogldll* = "libGL.so.1"
@@ -533,7 +535,7 @@ type
   GLsizeiptr* = GLsizei       # GL_ARB_vertex_buffer_object
   GLintptrARB* = GLint
   GLsizeiptrARB* = GLsizei    # GL_VERSION_2_0
-  GLHandle* = int
+  GLHandle* = GLuint
   PGLchar* = cstring
   PPGLchar* = ptr PGLChar     # GL_EXT_timer_query
   GLint64EXT* = Int64
