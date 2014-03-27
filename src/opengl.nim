@@ -5869,23 +5869,45 @@ proc glDetachShader*(programObj, shaderObj: GLhandle){.stdcall, importc, ogl.}
 proc glDisableVertexAttribArray*(index: GLuint){.stdcall, importc, ogl.}
 proc glEnableVertexAttribArray*(index: GLuint){.stdcall, importc, ogl.}
 proc glGetActiveAttrib*(programObj: GLhandle, index: GLuint, maxlength: GLsizei, 
-                        len: var GLint, size: var GLint, typ: var GLenum, 
+                        len: ptr GLint, size: ptr GLint, typ: ptr GLenum, 
                         name: PGLChar){.stdcall, importc, ogl.}
+proc glGetActiveAttrib*(programObj: GLhandle, index: GLuint, maxlength: GLsizei, 
+                        len: var GLint, size: var GLint, typ: var GLenum, 
+                        name: PGLChar) =
+  glGetActiveAttrib(programObj, index, maxlength, addr len, addr size,
+    addr typ, name)
+proc glGetActiveUniform*(programObj: GLhandle, index: GLuint, 
+                         maxLength: GLsizei, len: ptr GLsizei, size: ptr GLint, 
+                         typ: ptr GLenum, name: PGLChar){.stdcall, importc, ogl.}
 proc glGetActiveUniform*(programObj: GLhandle, index: GLuint, 
                          maxLength: GLsizei, len: var GLsizei, size: var GLint, 
-                         typ: var GLenum, name: PGLChar){.stdcall, importc, ogl.}
+                         typ: var GLenum, name: PGLChar) =
+  glGetActiveUniform(programObj, index, maxLength, addr len, addr size,
+    addr typ, name)
 proc glGetAttachedShaders*(programObj: GLhandle, MaxCount: GLsizei, 
-                           Count: var GLint, shaders: PGLuint){.stdcall, importc, ogl.}
+                           Count: ptr GLint, shaders: PGLuint){.stdcall, importc, ogl.}
+proc glGetAttachedShaders*(programObj: GLhandle, MaxCount: GLsizei, 
+                           Count: var GLint, shaders: PGLuint) =
+  glGetAttachedShaders(programObj, MaxCount, addr count, shaders)
 proc glGetAttribLocation*(programObj: GLhandle, char: PGLChar): glint{.stdcall, importc, ogl.}
 proc glGetProgramiv*(programObj: GLhandle, pname: GLenum, params: PGLInt){.
     stdcall, importc, ogl.}
 proc glGetProgramInfoLog*(programObj: GLHandle, maxLength: glsizei, 
-                          len: var GLint, infoLog: PGLChar){.stdcall, importc, ogl.}
+                          len: ptr GLint, infoLog: PGLChar){.stdcall, importc, ogl.}
+proc glGetProgramInfoLog*(programObj: GLHandle, maxLength: glsizei, 
+                          len: var GLint, infoLog: PGLChar) =
+  glGetProgramInfoLog(programObj, maxLength, addr len, infoLog)
 proc glGetShaderiv*(shaderObj: GLhandle, pname: GLenum, params: PGLInt){.stdcall, importc, ogl.}
 proc glGetShaderInfoLog*(shaderObj: GLHandle, maxLength: glsizei, 
-                         len: var glint, infoLog: PGLChar){.stdcall, importc, ogl.}
+                         len: ptr glint, infoLog: PGLChar){.stdcall, importc, ogl.}
+proc glGetShaderInfoLog*(shaderObj: GLHandle, maxLength: glsizei, 
+                         len: var glint, infoLog: PGLChar) =
+  glGetShaderInfoLog(shaderObj, maxLength, addr len, infoLog)
 proc glGetShaderSource*(shaderObj: GLhandle, maxlength: GLsizei, 
-                        len: var GLsizei, source: PGLChar){.stdcall, importc, ogl.}
+                        len: ptr GLsizei, source: PGLChar){.stdcall, importc, ogl.}
+proc glGetShaderSource*(shaderObj: GLhandle, maxlength: GLsizei, 
+                        len: var GLsizei, source: PGLChar) =
+  glGetShaderSource(shaderObj, maxlength, addr len, source)
 proc glGetUniformLocation*(programObj: GLhandle, char: PGLChar): glint{.stdcall, importc, ogl.}
 proc glGetUniformfv*(programObj: GLhandle, location: GLint, params: PGLfloat){.
     stdcall, importc, ogl.}
