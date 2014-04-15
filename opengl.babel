@@ -5,7 +5,7 @@ author: "Andreas Rumpf"
 description: "High-level and low-level wrapper for OpenGL"
 license: "MIT"
 
-srcDir: "src"
+srcDir: "lib"
 
 [Deps]
 requires: "nimrod > 0.9.2, x11"
