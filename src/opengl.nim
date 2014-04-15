@@ -358,7 +358,7 @@ wrapErrorChecking:
   proc glColor4dv(v: ptr GLdouble) {.importc.}
   proc glColor3fv(v: ptr GLfloat) {.importc.}
   proc glVertexAttribI1uiEXT(index: GLuint, x: GLuint) {.importc.}
-  proc glGetDebugMessageLogKHR(count: GLuint, bufsize: GLsizei, sources: ptr GLenum, types: ptr GLenum, ids: ptr GLuint, severities: ptr GLenum, lengths: ptr GLsizei, messageLog: cstring): TGLuint {.importc.}
+  proc glGetDebugMessageLogKHR(count: GLuint, bufsize: GLsizei, sources: ptr GLenum, types: ptr GLenum, ids: ptr GLuint, severities: ptr GLenum, lengths: ptr GLsizei, messageLog: ptr GLchar): TGLuint {.importc.}
   proc glVertexAttribI2iv(index: GLuint, v: ptr GLint) {.importc.}
   proc glTexCoord1xvOES(coords: ptr GLfixed) {.importc.}
   proc glVertex3hNV(x: GLhalfNV, y: GLhalfNV, z: GLhalfNV) {.importc.}
@@ -446,7 +446,7 @@ wrapErrorChecking:
   proc glImageTransformParameterfvHP(target: GLenum, pname: GLenum, params: ptr GLfloat) {.importc.}
   proc glUniform3uiEXT(location: GLint, v0: GLuint, v1: GLuint, v2: GLuint) {.importc.}
   proc glGetInvariantIntegervEXT(id: GLuint, value: GLenum, data: ptr GLint) {.importc.}
-  proc glGetTransformFeedbackVaryingEXT(program: GLuint, index: GLuint, bufSize: GLsizei, length: ptr GLsizei, size: ptr GLsizei, `type`: ptr GLenum, name: cstring) {.importc.}
+  proc glGetTransformFeedbackVaryingEXT(program: GLuint, index: GLuint, bufSize: GLsizei, length: ptr GLsizei, size: ptr GLsizei, `type`: ptr GLenum, name: ptr GLchar) {.importc.}
   proc glSamplerParameterIuiv(sampler: GLuint, pname: GLenum, param: ptr GLuint) {.importc.}
   proc glProgramUniform2fEXT(program: GLuint, location: GLint, v0: GLfloat, v1: GLfloat) {.importc.}
   proc glMultiTexCoord2hvNV(target: GLenum, v: ptr GLhalfNV) {.importc.}
@@ -457,14 +457,14 @@ wrapErrorChecking:
   proc glFenceSyncAPPLE(condition: GLenum, flags: GLbitfield): TGLsync {.importc.}
   proc glGetVariantArrayObjectivATI(id: GLuint, pname: GLenum, params: ptr GLint) {.importc.}
   proc glProgramUniform4dvEXT(program: GLuint, location: GLint, count: GLsizei, value: ptr GLdouble) {.importc.}
-  proc glPushDebugGroupKHR(source: GLenum, id: GLuint, length: GLsizei, message: cstring) {.importc.}
+  proc glPushDebugGroupKHR(source: GLenum, id: GLuint, length: GLsizei, message: ptr GLchar) {.importc.}
   proc glFragmentLightivSGIX(light: GLenum, pname: GLenum, params: ptr GLint) {.importc.}
   proc glFramebufferTexture2DEXT(target: GLenum, attachment: GLenum, textarget: GLenum, texture: GLuint, level: GLint) {.importc.}
   proc glGetActiveSubroutineUniformiv(program: GLuint, shadertype: GLenum, index: GLuint, pname: GLenum, values: ptr GLint) {.importc.}
   proc glFrustumf(l: GLfloat, r: GLfloat, b: GLfloat, t: GLfloat, n: GLfloat, f: GLfloat) {.importc.}
   proc glEndQueryIndexed(target: GLenum, index: GLuint) {.importc.}
   proc glCompressedTextureSubImage3DEXT(texture: GLuint, target: GLenum, level: GLint, xoffset: GLint, yoffset: GLint, zoffset: GLint, width: GLsizei, height: GLsizei, depth: GLsizei, format: GLenum, imageSize: GLsizei, bits: pointer) {.importc.}
-  proc glGetProgramPipelineInfoLogEXT(pipeline: GLuint, bufSize: GLsizei, length: ptr GLsizei, infoLog: cstring) {.importc.}
+  proc glGetProgramPipelineInfoLogEXT(pipeline: GLuint, bufSize: GLsizei, length: ptr GLsizei, infoLog: ptr GLchar) {.importc.}
   proc glGetVertexAttribfvNV(index: GLuint, pname: GLenum, params: ptr GLfloat) {.importc.}
   proc glVertexArrayIndexOffsetEXT(vaobj: GLuint, buffer: GLuint, `type`: GLenum, stride: GLsizei, offset: GLintptr) {.importc.}
   proc glDrawTexsvOES(coords: ptr GLshort) {.importc.}
@@ -484,7 +484,7 @@ wrapErrorChecking:
   proc glColor3bv(v: ptr GLbyte) {.importc.}
   proc glNamedProgramLocalParameter4dEXT(program: GLuint, target: GLenum, index: GLuint, x: GLdouble, y: GLdouble, z: GLdouble, w: GLdouble) {.importc.}
   proc glVertexPointer(size: GLint, `type`: GLenum, stride: GLsizei, `pointer`: pointer) {.importc.}
-  proc glGetObjectLabelKHR(identifier: GLenum, name: GLuint, bufSize: GLsizei, length: ptr GLsizei, label: cstring) {.importc.}
+  proc glGetObjectLabelKHR(identifier: GLenum, name: GLuint, bufSize: GLsizei, length: ptr GLsizei, label: ptr GLchar) {.importc.}
   proc glCombinerStageParameterfvNV(stage: GLenum, pname: GLenum, params: ptr GLfloat) {.importc.}
   proc glNormal3hvNV(v: ptr GLhalfNV) {.importc.}
   proc glUniform2i64NV(location: GLint, x: GLint64EXT, y: GLint64EXT) {.importc.}
@@ -553,9 +553,9 @@ wrapErrorChecking:
   proc glFlushMappedBufferRangeEXT(target: GLenum, offset: GLintptr, length: GLsizeiptr) {.importc.}
   proc glNormal3dv(v: ptr GLdouble) {.importc.}
   proc glProgramUniform4d(program: GLuint, location: GLint, v0: GLdouble, v1: GLdouble, v2: GLdouble, v3: GLdouble) {.importc.}
-  proc glCreateShaderProgramEXT(`type`: GLenum, string: cstring): TGLuint {.importc.}
+  proc glCreateShaderProgramEXT(`type`: GLenum, string: ptr GLchar): TGLuint {.importc.}
   proc glGetLightxvOES(light: GLenum, pname: GLenum, params: ptr GLfixed) {.importc.}
-  proc glGetObjectPtrLabelKHR(`ptr`: ptr pointer, bufSize: GLsizei, length: ptr GLsizei, label: cstring) {.importc.}
+  proc glGetObjectPtrLabelKHR(`ptr`: ptr pointer, bufSize: GLsizei, length: ptr GLsizei, label: ptr GLchar) {.importc.}
   proc glTransformPathNV(resultPath: GLuint, srcPath: GLuint, transformType: GLenum, transformValues: ptr GLfloat) {.importc.}
   proc glMultTransposeMatrixf(m: ptr GLfloat) {.importc.}
   proc glMapVertexAttrib2dAPPLE(index: GLuint, size: GLuint, u1: GLdouble, u2: GLdouble, ustride: GLint, uorder: GLint, v1: GLdouble, v2: GLdouble, vstride: GLint, vorder: GLint, points: ptr GLdouble) {.importc.}
@@ -575,7 +575,7 @@ wrapErrorChecking:
   proc glMultiTexEnviEXT(texunit: GLenum, target: GLenum, pname: GLenum, param: GLint) {.importc.}
   proc glProgramUniform1fv(program: GLuint, location: GLint, count: GLsizei, value: ptr GLfloat) {.importc.}
   proc glDrawBuffersARB(n: GLsizei, bufs: ptr GLenum) {.importc.}
-  proc glGetUniformLocationARB(programObj: GLhandleARB, name: cstring): TGLint {.importc.}
+  proc glGetUniformLocationARB(programObj: GLhandleARB, name: ptr GLcharARB): TGLint {.importc.}
   proc glResumeTransformFeedback() {.importc.}
   proc glMap1f(target: GLenum, u1: GLfloat, u2: GLfloat, stride: GLint, order: GLint, points: ptr GLfloat) {.importc.}
   proc glVertex3xOES(x: GLfixed, y: GLfixed) {.importc.}
@@ -587,7 +587,7 @@ wrapErrorChecking:
   proc glGetVertexArrayPointeri_vEXT(vaobj: GLuint, index: GLuint, pname: GLenum, param: ptr pointer) {.importc.}
   proc glProgramParameter4fvNV(target: GLenum, index: GLuint, v: ptr GLfloat) {.importc.}
   proc glDiscardFramebufferEXT(target: GLenum, numAttachments: GLsizei, attachments: ptr GLenum) {.importc.}
-  proc glGetDebugMessageLogARB(count: GLuint, bufsize: GLsizei, sources: ptr GLenum, types: ptr GLenum, ids: ptr GLuint, severities: ptr GLenum, lengths: ptr GLsizei, messageLog: cstring): TGLuint {.importc.}
+  proc glGetDebugMessageLogARB(count: GLuint, bufsize: GLsizei, sources: ptr GLenum, types: ptr GLenum, ids: ptr GLuint, severities: ptr GLenum, lengths: ptr GLsizei, messageLog: ptr GLchar): TGLuint {.importc.}
   proc glResolveMultisampleFramebufferAPPLE() {.importc.}
   proc glGetIntegeri_vEXT(target: GLenum, index: GLuint, data: ptr GLint) {.importc.}
   proc glDepthBoundsdNV(zmin: GLdouble, zmax: GLdouble) {.importc.}
@@ -642,7 +642,7 @@ wrapErrorChecking:
   proc glVertexAttribL4i64vNV(index: GLuint, v: ptr GLint64EXT) {.importc.}
   proc glEnableVariantClientStateEXT(id: GLuint) {.importc.}
   proc glSyncTextureINTEL(texture: GLuint) {.importc.}
-  proc glGetObjectPtrLabel(`ptr`: ptr pointer, bufSize: GLsizei, length: ptr GLsizei, label: cstring) {.importc.}
+  proc glGetObjectPtrLabel(`ptr`: ptr pointer, bufSize: GLsizei, length: ptr GLsizei, label: ptr GLchar) {.importc.}
   proc glCopyTexSubImage1D(target: GLenum, level: GLint, xoffset: GLint, x: GLint, y: GLint, width: GLsizei) {.importc.}
   proc glOrthofOES(l: GLfloat, r: GLfloat, b: GLfloat, t: GLfloat, n: GLfloat, f: GLfloat) {.importc.}
   proc glWindowPos3sARB(x: GLshort, y: GLshort, z: GLshort) {.importc.}
@@ -665,7 +665,7 @@ wrapErrorChecking:
   proc glVertexP2ui(`type`: GLenum, value: GLuint) {.importc.}
   proc glGenQueries(n: GLsizei, ids: ptr GLuint) {.importc.}
   proc glBindBufferOffsetNV(target: GLenum, index: GLuint, buffer: GLuint, offset: GLintptr) {.importc.}
-  proc glGetFragDataLocation(program: GLuint, name: cstring): TGLint {.importc.}
+  proc glGetFragDataLocation(program: GLuint, name: ptr GLchar): TGLint {.importc.}
   proc glVertexAttribs2svNV(index: GLuint, count: GLsizei, v: ptr GLshort) {.importc.}
   proc glGetPathLengthNV(path: GLuint, startSegment: GLsizei, numSegments: GLsizei): TGLfloat {.importc.}
   proc glVertexAttrib3dARB(index: GLuint, x: GLdouble, y: GLdouble, z: GLdouble) {.importc.}
@@ -731,7 +731,7 @@ wrapErrorChecking:
   proc glGetFixedv(pname: GLenum, params: ptr GLfixed) {.importc.}
   proc glMaterialf(face: GLenum, pname: GLenum, param: GLfloat) {.importc.}
   proc glVideoCaptureStreamParameterfvNV(video_capture_slot: GLuint, stream: GLuint, pname: GLenum, params: ptr GLfloat) {.importc.}
-  proc glGetDebugMessageLogAMD(count: GLuint, bufsize: GLsizei, categories: ptr GLenum, severities: ptr GLuint, ids: ptr GLuint, lengths: ptr GLsizei, message: cstring): TGLuint {.importc.}
+  proc glGetDebugMessageLogAMD(count: GLuint, bufsize: GLsizei, categories: ptr GLenum, severities: ptr GLuint, ids: ptr GLuint, lengths: ptr GLsizei, message: ptr GLchar): TGLuint {.importc.}
   proc glProgramUniform2uiv(program: GLuint, location: GLint, count: GLsizei, value: ptr GLuint) {.importc.}
   proc glMatrixMultTransposedEXT(mode: GLenum, m: ptr GLdouble) {.importc.}
   proc glIsPointInStrokePathNV(path: GLuint, x: GLfloat, y: GLfloat): TGLboolean {.importc.}
@@ -767,7 +767,7 @@ wrapErrorChecking:
   proc glTexStorage3D(target: GLenum, levels: GLsizei, internalformat: GLenum, width: GLsizei, height: GLsizei, depth: GLsizei) {.importc.}
   proc glMultiTexCoord2xOES(texture: GLenum, s: GLfixed, t: GLfixed) {.importc.}
   proc glWindowPos2fARB(x: GLfloat, y: GLfloat) {.importc.}
-  proc glGetProgramResourceIndex(program: GLuint, programInterface: GLenum, name: cstring): TGLuint {.importc.}
+  proc glGetProgramResourceIndex(program: GLuint, programInterface: GLenum, name: ptr GLchar): TGLuint {.importc.}
   proc glProgramUniform2uivEXT(program: GLuint, location: GLint, count: GLsizei, value: ptr GLuint) {.importc.}
   proc glMakeImageHandleNonResidentNV(handle: GLuint64) {.importc.}
   proc glNamedProgramLocalParameter4fvEXT(program: GLuint, target: GLenum, index: GLuint, params: ptr GLfloat) {.importc.}
@@ -793,7 +793,7 @@ wrapErrorChecking:
   proc glProgramLocalParameterI4uivNV(target: GLenum, index: GLuint, params: ptr GLuint) {.importc.}
   proc glRenderMode(mode: GLenum): TGLint {.importc.}
   proc glVertexStream4fATI(stream: GLenum, x: GLfloat, y: GLfloat, z: GLfloat, w: GLfloat) {.importc.}
-  proc glGetObjectLabelEXT(`type`: GLenum, `object`: GLuint, bufSize: GLsizei, length: ptr GLsizei, label: cstring) {.importc.}
+  proc glGetObjectLabelEXT(`type`: GLenum, `object`: GLuint, bufSize: GLsizei, length: ptr GLsizei, label: ptr GLchar) {.importc.}
   proc glNamedFramebufferTexture3DEXT(framebuffer: GLuint, attachment: GLenum, textarget: GLenum, texture: GLuint, level: GLint, zoffset: GLint) {.importc.}
   proc glLoadMatrixf(m: ptr GLfloat) {.importc.}
   proc glGetQueryObjectuivEXT(id: GLuint, pname: GLenum, params: ptr GLuint) {.importc.}
@@ -803,7 +803,7 @@ wrapErrorChecking:
   proc glTexGenxvOES(coord: GLenum, pname: GLenum, params: ptr GLfixed) {.importc.}
   proc glMatrixMode(mode: GLenum) {.importc.}
   proc glColorTableParameterivSGI(target: GLenum, pname: GLenum, params: ptr GLint) {.importc.}
-  proc glGetProgramInfoLog(program: GLuint, bufSize: GLsizei, length: ptr GLsizei, infoLog: cstring) {.importc.}
+  proc glGetProgramInfoLog(program: GLuint, bufSize: GLsizei, length: ptr GLsizei, infoLog: ptr GLchar) {.importc.}
   proc glGetSeparableFilter(target: GLenum, format: GLenum, `type`: GLenum, row: pointer, column: pointer, span: pointer) {.importc.}
   proc glFogfv(pname: GLenum, params: ptr GLfloat) {.importc.}
   proc glDrawTexfvOES(coords: ptr GLfloat) {.importc.}
@@ -829,7 +829,7 @@ wrapErrorChecking:
   proc glBeginConditionalRender(id: GLuint, mode: GLenum) {.importc.}
   proc glVertexAttribI3uiEXT(index: GLuint, x: GLuint, y: GLuint, z: GLuint) {.importc.}
   proc glVDPAUMapSurfacesNV(numSurfaces: GLsizei, surfaces: ptr GLvdpauSurfaceNV) {.importc.}
-  proc glGetProgramResourceName(program: GLuint, programInterface: GLenum, index: GLuint, bufSize: GLsizei, length: ptr GLsizei, name: cstring) {.importc.}
+  proc glGetProgramResourceName(program: GLuint, programInterface: GLenum, index: GLuint, bufSize: GLsizei, length: ptr GLsizei, name: ptr GLchar) {.importc.}
   proc glMultiTexCoord4f(target: GLenum, s: GLfloat, t: GLfloat, r: GLfloat, q: GLfloat) {.importc.}
   proc glVertexAttrib2hNV(index: GLuint, x: GLhalfNV, y: GLhalfNV) {.importc.}
   proc glDrawArraysInstancedNV(mode: GLenum, first: GLint, count: GLsizei, primcount: GLsizei) {.importc.}
@@ -850,7 +850,7 @@ wrapErrorChecking:
   proc glReferencePlaneSGIX(equation: ptr GLdouble) {.importc.}
   proc glNormalStream3iATI(stream: GLenum, nx: GLint, ny: GLint, nz: GLint) {.importc.}
   proc glGetColorTableParameterfvEXT(target: GLenum, pname: GLenum, params: ptr GLfloat) {.importc.}
-  proc glGetAttribLocation(program: GLuint, name: cstring): TGLint {.importc.}
+  proc glGetAttribLocation(program: GLuint, name: ptr GLchar): TGLint {.importc.}
   proc glMultiTexParameterfEXT(texunit: GLenum, target: GLenum, pname: GLenum, param: GLfloat) {.importc.}
   proc glGenFencesNV(n: GLsizei, fences: ptr GLuint) {.importc.}
   proc glUniform4dv(location: GLint, count: GLsizei, value: ptr GLdouble) {.importc.}
@@ -877,7 +877,7 @@ wrapErrorChecking:
   proc glMultiTexCoord3fARB(target: GLenum, s: GLfloat, t: GLfloat, r: GLfloat) {.importc.}
   proc glRasterPos3xOES(x: GLfixed, y: GLfixed, z: GLfixed) {.importc.}
   proc glEGLImageTargetRenderbufferStorageOES(target: GLenum, image: GLeglImageOES) {.importc.}
-  proc glGetAttribLocationARB(programObj: GLhandleARB, name: cstring): TGLint {.importc.}
+  proc glGetAttribLocationARB(programObj: GLhandleARB, name: ptr GLcharARB): TGLint {.importc.}
   proc glProgramNamedParameter4dvNV(id: GLuint, len: GLsizei, name: ptr GLubyte, v: ptr GLdouble) {.importc.}
   proc glProgramLocalParameterI4uiNV(target: GLenum, index: GLuint, x: GLuint, y: GLuint, z: GLuint, w: GLuint) {.importc.}
   proc glNamedFramebufferTextureFaceEXT(framebuffer: GLuint, attachment: GLenum, texture: GLuint, level: GLint, face: GLenum) {.importc.}
@@ -954,7 +954,7 @@ wrapErrorChecking:
   proc glGetPixelTexGenParameterivSGIS(pname: GLenum, params: ptr GLint) {.importc.}
   proc glVariantuivEXT(id: GLuint, `addr`: ptr GLuint) {.importc.}
   proc glTexParameterfv(target: GLenum, pname: GLenum, params: ptr GLfloat) {.importc.}
-  proc glGetSubroutineUniformLocation(program: GLuint, shadertype: GLenum, name: cstring): TGLint {.importc.}
+  proc glGetSubroutineUniformLocation(program: GLuint, shadertype: GLenum, name: ptr GLchar): TGLint {.importc.}
   proc glProgramUniformMatrix3fvEXT(program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: ptr GLfloat) {.importc.}
   proc glDrawBuffersATI(n: GLsizei, bufs: ptr GLenum) {.importc.}
   proc glGetVertexAttribivNV(index: GLuint, pname: GLenum, params: ptr GLint) {.importc.}
@@ -995,7 +995,7 @@ wrapErrorChecking:
   proc glTexCoord3f(s: GLfloat, t: GLfloat, r: GLfloat) {.importc.}
   proc glMultiTexCoord1fARB(target: GLenum, s: GLfloat) {.importc.}
   proc glVertexAttrib4f(index: GLuint, x: GLfloat, y: GLfloat, z: GLfloat, w: GLfloat) {.importc.}
-  proc glGetFragDataLocationEXT(program: GLuint, name: cstring): TGLint {.importc.}
+  proc glGetFragDataLocationEXT(program: GLuint, name: ptr GLchar): TGLint {.importc.}
   proc glFlushMappedNamedBufferRangeEXT(buffer: GLuint, offset: GLintptr, length: GLsizeiptr) {.importc.}
   proc glVertexAttrib1sARB(index: GLuint, x: GLshort) {.importc.}
   proc glBitmapxOES(width: GLsizei, height: GLsizei, xorig: GLfixed, yorig: GLfixed, xmove: GLfixed, ymove: GLfixed, bitmap: ptr GLubyte) {.importc.}
@@ -1024,7 +1024,7 @@ wrapErrorChecking:
   proc glEnableDriverControlQCOM(driverControl: GLuint) {.importc.}
   proc glPointParameteri(pname: GLenum, param: GLint) {.importc.}
   proc glVertexAttribI2i(index: GLuint, x: GLint, y: GLint) {.importc.}
-  proc glGetDriverControlStringQCOM(driverControl: GLuint, bufSize: GLsizei, length: ptr GLsizei, driverControlString: cstring) {.importc.}
+  proc glGetDriverControlStringQCOM(driverControl: GLuint, bufSize: GLsizei, length: ptr GLsizei, driverControlString: ptr GLchar) {.importc.}
   proc glGetTexLevelParameteriv(target: GLenum, level: GLint, pname: GLenum, params: ptr GLint) {.importc.}
   proc glGetHandleARB(pname: GLenum): TGLhandleARB {.importc.}
   proc glIndexubv(c: ptr GLubyte) {.importc.}
@@ -1058,7 +1058,7 @@ wrapErrorChecking:
   proc glVertexAttribI1iEXT(index: GLuint, x: GLint) {.importc.}
   proc glFramebufferTexture1D(target: GLenum, attachment: GLenum, textarget: GLenum, texture: GLuint, level: GLint) {.importc.}
   proc glVertexAttribI2uiv(index: GLuint, v: ptr GLuint) {.importc.}
-  proc glBindFragDataLocation(program: GLuint, color: GLuint, name: cstring) {.importc.}
+  proc glBindFragDataLocation(program: GLuint, color: GLuint, name: ptr GLchar) {.importc.}
   proc glClearStencil(s: GLint) {.importc.}
   proc glVertexAttrib4Nubv(index: GLuint, v: ptr GLubyte) {.importc.}
   proc glConvolutionFilter2DEXT(target: GLenum, internalformat: GLenum, width: GLsizei, height: GLsizei, format: GLenum, `type`: GLenum, image: pointer) {.importc.}
@@ -1103,7 +1103,7 @@ wrapErrorChecking:
   proc glGetMinmaxParameterfv(target: GLenum, pname: GLenum, params: ptr GLfloat) {.importc.}
   proc glColor4fNormal3fVertex3fSUN(r: GLfloat, g: GLfloat, b: GLfloat, a: GLfloat, nx: GLfloat, ny: GLfloat, nz: GLfloat, x: GLfloat, y: GLfloat, z: GLfloat) {.importc.}
   proc glWindowPos2d(x: GLdouble, y: GLdouble) {.importc.}
-  proc glGetPerfMonitorGroupStringAMD(group: GLuint, bufSize: GLsizei, length: ptr GLsizei, groupString: cstring) {.importc.}
+  proc glGetPerfMonitorGroupStringAMD(group: GLuint, bufSize: GLsizei, length: ptr GLsizei, groupString: ptr GLchar) {.importc.}
   proc glUniformHandleui64vNV(location: GLint, count: GLsizei, value: ptr GLuint64) {.importc.}
   proc glBlendEquation(mode: GLenum) {.importc.}
   proc glMapBufferARB(target: GLenum, access: GLenum) {.importc.}
@@ -1145,7 +1145,7 @@ wrapErrorChecking:
   proc glVertexAttrib2f(index: GLuint, x: GLfloat, y: GLfloat) {.importc.}
   proc glMultiTexGenivEXT(texunit: GLenum, coord: GLenum, pname: GLenum, params: ptr GLint) {.importc.}
   proc glUniformui64vNV(location: GLint, count: GLsizei, value: ptr GLuint64EXT) {.importc.}
-  proc glGetInfoLogARB(obj: GLhandleARB, maxLength: GLsizei, length: ptr GLsizei, infoLog: cstring) {.importc.}
+  proc glGetInfoLogARB(obj: GLhandleARB, maxLength: GLsizei, length: ptr GLsizei, infoLog: ptr GLcharARB) {.importc.}
   proc glGetNamedProgramLocalParameterIivEXT(program: GLuint, target: GLenum, index: GLuint, params: ptr GLint) {.importc.}
   proc glVertexAttrib4s(index: GLuint, x: GLshort, y: GLshort, z: GLshort, w: GLshort) {.importc.}
   proc glUniformMatrix4x2dv(location: GLint, count: GLsizei, transpose: GLboolean, value: ptr GLdouble) {.importc.}
@@ -1162,7 +1162,7 @@ wrapErrorChecking:
   proc glTexParameteriv(target: GLenum, pname: GLenum, params: ptr GLint) {.importc.}
   proc glGetArrayObjectivATI(`array`: GLenum, pname: GLenum, params: ptr GLint) {.importc.}
   proc glGetTexParameterIuiv(target: GLenum, pname: GLenum, params: ptr GLuint) {.importc.}
-  proc glGetProgramPipelineInfoLog(pipeline: GLuint, bufSize: GLsizei, length: ptr GLsizei, infoLog: cstring) {.importc.}
+  proc glGetProgramPipelineInfoLog(pipeline: GLuint, bufSize: GLsizei, length: ptr GLsizei, infoLog: ptr GLchar) {.importc.}
   proc glGetOcclusionQueryuivNV(id: GLuint, pname: GLenum, params: ptr GLuint) {.importc.}
   proc glVertexAttrib4bvARB(index: GLuint, v: ptr GLbyte) {.importc.}
   proc glListParameterfvSGIX(list: GLuint, pname: GLenum, params: ptr GLfloat) {.importc.}
@@ -1206,7 +1206,7 @@ wrapErrorChecking:
   proc glProgramUniform2dEXT(program: GLuint, location: GLint, x: GLdouble, y: GLdouble) {.importc.}
   proc glCompressedMultiTexImage2DEXT(texunit: GLenum, target: GLenum, level: GLint, internalformat: GLenum, width: GLsizei, height: GLsizei, border: GLint, imageSize: GLsizei, bits: pointer) {.importc.}
   proc glDeleteSyncAPPLE(sync: GLsync) {.importc.}
-  proc glDebugMessageInsertAMD(category: GLenum, severity: GLenum, id: GLuint, length: GLsizei, buf: cstring) {.importc.}
+  proc glDebugMessageInsertAMD(category: GLenum, severity: GLenum, id: GLuint, length: GLsizei, buf: ptr GLchar) {.importc.}
   proc glSecondaryColorPointerEXT(size: GLint, `type`: GLenum, stride: GLsizei, `pointer`: pointer) {.importc.}
   proc glTextureImage2DMultisampleNV(texture: GLuint, target: GLenum, samples: GLsizei, internalFormat: GLint, width: GLsizei, height: GLsizei, fixedSampleLocations: GLboolean) {.importc.}
   proc glBeginFragmentShaderATI() {.importc.}
@@ -1247,7 +1247,7 @@ wrapErrorChecking:
   proc glFinish() {.importc.}
   proc glDeleteVertexShaderEXT(id: GLuint) {.importc.}
   proc glFinishObjectAPPLE(`object`: GLenum, name: GLint) {.importc.}
-  proc glGetActiveAttribARB(programObj: GLhandleARB, index: GLuint, maxLength: GLsizei, length: ptr GLsizei, size: ptr GLint, `type`: ptr GLenum, name: cstring) {.importc.}
+  proc glGetActiveAttribARB(programObj: GLhandleARB, index: GLuint, maxLength: GLsizei, length: ptr GLsizei, size: ptr GLint, `type`: ptr GLenum, name: ptr GLcharARB) {.importc.}
   proc glPointParameterx(pname: GLenum, param: GLfixed) {.importc.}
   proc glProgramUniformui64vNV(program: GLuint, location: GLint, count: GLsizei, value: ptr GLuint64EXT) {.importc.}
   proc glSecondaryColor3ubv(v: ptr GLubyte) {.importc.}
@@ -1273,7 +1273,7 @@ wrapErrorChecking:
   proc glUniform1i(location: GLint, v0: GLint) {.importc.}
   proc glVertexAttribL2d(index: GLuint, x: GLdouble, y: GLdouble) {.importc.}
   proc glTestObjectAPPLE(`object`: GLenum, name: GLuint): TGLboolean {.importc.}
-  proc glGetTransformFeedbackVarying(program: GLuint, index: GLuint, bufSize: GLsizei, length: ptr GLsizei, size: ptr GLsizei, `type`: ptr GLenum, name: cstring) {.importc.}
+  proc glGetTransformFeedbackVarying(program: GLuint, index: GLuint, bufSize: GLsizei, length: ptr GLsizei, size: ptr GLsizei, `type`: ptr GLenum, name: ptr GLchar) {.importc.}
   proc glFramebufferRenderbufferOES(target: GLenum, attachment: GLenum, renderbuffertarget: GLenum, renderbuffer: GLuint) {.importc.}
   proc glVertexStream3iATI(stream: GLenum, x: GLint, y: GLint, z: GLint) {.importc.}
   proc glMakeTextureHandleNonResidentNV(handle: GLuint64) {.importc.}
@@ -1320,7 +1320,7 @@ wrapErrorChecking:
   proc glVertexAttribL4i64NV(index: GLuint, x: GLint64EXT, y: GLint64EXT, z: GLint64EXT, w: GLint64EXT) {.importc.}
   proc glDebugMessageCallbackARB(callback: GLDEBUGPROCARB, userParam: ptr pointer) {.importc.}
   proc glMultiTexCoordP1uiv(texture: GLenum, `type`: GLenum, coords: ptr GLuint) {.importc.}
-  proc glLabelObjectEXT(`type`: GLenum, `object`: GLuint, length: GLsizei, label: cstring) {.importc.}
+  proc glLabelObjectEXT(`type`: GLenum, `object`: GLuint, length: GLsizei, label: ptr GLchar) {.importc.}
   proc glGetnPolygonStippleARB(bufSize: GLsizei, pattern: ptr GLubyte) {.importc.}
   proc glTexCoord3xOES(s: GLfixed, t: GLfixed, r: GLfixed) {.importc.}
   proc glCopyPixels(x: GLint, y: GLint, width: GLsizei, height: GLsizei, `type`: GLenum) {.importc.}
@@ -1367,7 +1367,7 @@ wrapErrorChecking:
   proc glBlendEquationSeparate(modeRGB: GLenum, modeAlpha: GLenum) {.importc.}
   proc glGetColorTableParameterfv(target: GLenum, pname: GLenum, params: ptr GLfloat) {.importc.}
   proc glQueryCounterEXT(id: GLuint, target: GLenum) {.importc.}
-  proc glExtGetProgramBinarySourceQCOM(program: GLuint, shadertype: GLenum, source: cstring, length: ptr GLint) {.importc.}
+  proc glExtGetProgramBinarySourceQCOM(program: GLuint, shadertype: GLenum, source: ptr GLchar, length: ptr GLint) {.importc.}
   proc glGetConvolutionParameteriv(target: GLenum, pname: GLenum, params: ptr GLint) {.importc.}
   proc glIsProgramPipeline(pipeline: GLuint): TGLboolean {.importc.}
   proc glVertexWeightfvEXT(weight: ptr GLfloat) {.importc.}
@@ -1413,7 +1413,7 @@ wrapErrorChecking:
   proc glUniform4uiEXT(location: GLint, v0: GLuint, v1: GLuint, v2: GLuint, v3: GLuint) {.importc.}
   proc glGetShaderiv(shader: GLuint, pname: GLenum, params: ptr GLint) {.importc.}
   proc glGetQueryIndexediv(target: GLenum, index: GLuint, pname: GLenum, params: ptr GLint) {.importc.}
-  proc glDebugMessageInsert(source: GLenum, `type`: GLenum, id: GLuint, severity: GLenum, length: GLsizei, buf: cstring) {.importc.}
+  proc glDebugMessageInsert(source: GLenum, `type`: GLenum, id: GLuint, severity: GLenum, length: GLsizei, buf: ptr GLchar) {.importc.}
   proc glVertexAttribs2dvNV(index: GLuint, count: GLsizei, v: ptr GLdouble) {.importc.}
   proc glGetFixedvOES(pname: GLenum, params: ptr GLfixed) {.importc.}
   proc glUniform2iv(location: GLint, count: GLsizei, value: ptr GLint) {.importc.}
@@ -1433,13 +1433,13 @@ wrapErrorChecking:
   proc glGetIntegeri_v(target: GLenum, index: GLuint, data: ptr GLint) {.importc.}
   proc glProgramUniform3uiv(program: GLuint, location: GLint, count: GLsizei, value: ptr GLuint) {.importc.}
   proc glGetActiveUniformBlockiv(program: GLuint, uniformBlockIndex: GLuint, pname: GLenum, params: ptr GLint) {.importc.}
-  proc glCreateShaderProgramv(`type`: GLenum, count: GLsizei, strings: cstringArray): TGLuint {.importc.}
+  proc glCreateShaderProgramv(`type`: GLenum, count: GLsizei, strings: ptr ptr GLchar): TGLuint {.importc.}
   proc glUniform2fARB(location: GLint, v0: GLfloat, v1: GLfloat) {.importc.}
   proc glVertexStream4ivATI(stream: GLenum, coords: ptr GLint) {.importc.}
   proc glNormalP3uiv(`type`: GLenum, coords: ptr GLuint) {.importc.}
   proc glVertexAttribLFormat(attribindex: GLuint, size: GLint, `type`: GLenum, relativeoffset: GLuint) {.importc.}
   proc glTexCoord2bvOES(coords: ptr GLbyte) {.importc.}
-  proc glGetActiveUniformName(program: GLuint, uniformIndex: GLuint, bufSize: GLsizei, length: ptr GLsizei, uniformName: cstring) {.importc.}
+  proc glGetActiveUniformName(program: GLuint, uniformIndex: GLuint, bufSize: GLsizei, length: ptr GLsizei, uniformName: ptr GLchar) {.importc.}
   proc glTexCoord2sv(v: ptr GLshort) {.importc.}
   proc glVertexAttrib2dNV(index: GLuint, x: GLdouble, y: GLdouble) {.importc.}
   proc glGetFogFuncSGIS(points: ptr GLfloat) {.importc.}
@@ -1464,7 +1464,7 @@ wrapErrorChecking:
   proc glUniform2fvARB(location: GLint, count: GLsizei, value: ptr GLfloat) {.importc.}
   proc glFogf(pname: GLenum, param: GLfloat) {.importc.}
   proc glMultiTexCoord1iARB(target: GLenum, s: GLint) {.importc.}
-  proc glGetActiveUniformARB(programObj: GLhandleARB, index: GLuint, maxLength: GLsizei, length: ptr GLsizei, size: ptr GLint, `type`: ptr GLenum, name: cstring) {.importc.}
+  proc glGetActiveUniformARB(programObj: GLhandleARB, index: GLuint, maxLength: GLsizei, length: ptr GLsizei, size: ptr GLint, `type`: ptr GLenum, name: ptr GLcharARB) {.importc.}
   proc glMapGrid1xOES(n: GLint, u1: GLfixed, u2: GLfixed) {.importc.}
   proc glIndexsv(c: ptr GLshort) {.importc.}
   proc glFragmentMaterialfSGIX(face: GLenum, pname: GLenum, param: GLfloat) {.importc.}
@@ -1510,7 +1510,7 @@ wrapErrorChecking:
   proc glNamedRenderbufferStorageMultisampleCoverageEXT(renderbuffer: GLuint, coverageSamples: GLsizei, colorSamples: GLsizei, internalformat: GLenum, width: GLsizei, height: GLsizei) {.importc.}
   proc glVertexAttribI3iEXT(index: GLuint, x: GLint, y: GLint, z: GLint) {.importc.}
   proc glUniform4uivEXT(location: GLint, count: GLsizei, value: ptr GLuint) {.importc.}
-  proc glGetUniformLocation(program: GLuint, name: cstring): TGLint {.importc.}
+  proc glGetUniformLocation(program: GLuint, name: ptr GLchar): TGLint {.importc.}
   proc glCurrentPaletteMatrixARB(index: GLint) {.importc.}
   proc glVertexAttribLPointerEXT(index: GLuint, size: GLint, `type`: GLenum, stride: GLsizei, `pointer`: pointer) {.importc.}
   proc glFogCoorddvEXT(coord: ptr GLdouble) {.importc.}
@@ -1538,7 +1538,7 @@ wrapErrorChecking:
   proc glGetStringi(name: GLenum, index: GLuint): TGLubyte {.importc.}
   proc glMakeBufferNonResidentNV(target: GLenum) {.importc.}
   proc glVertex4bOES(x: GLbyte, y: GLbyte, z: GLbyte) {.importc.}
-  proc glGetObjectLabel(identifier: GLenum, name: GLuint, bufSize: GLsizei, length: ptr GLsizei, label: cstring) {.importc.}
+  proc glGetObjectLabel(identifier: GLenum, name: GLuint, bufSize: GLsizei, length: ptr GLsizei, label: ptr GLchar) {.importc.}
   proc glClipPlanexOES(plane: GLenum, equation: ptr GLfixed) {.importc.}
   proc glElementPointerAPPLE(`type`: GLenum, `pointer`: pointer) {.importc.}
   proc glIsAsyncMarkerSGIX(marker: GLuint): TGLboolean {.importc.}
@@ -1567,13 +1567,13 @@ wrapErrorChecking:
   proc glGetFloatIndexedvEXT(target: GLenum, index: GLuint, data: ptr GLfloat) {.importc.}
   proc glTexCoord1xOES(s: GLfixed) {.importc.}
   proc glTexCoord4f(s: GLfloat, t: GLfloat, r: GLfloat, q: GLfloat) {.importc.}
-  proc glShaderSource(shader: GLuint, count: GLsizei, string: cstringArray, length: ptr GLint) {.importc.}
+  proc glShaderSource(shader: GLuint, count: GLsizei, string: ptr ptr GLchar, length: ptr GLint) {.importc.}
   proc glGetDetailTexFuncSGIS(target: GLenum, points: ptr GLfloat) {.importc.}
   proc glResetHistogram(target: GLenum) {.importc.}
   proc glVertexAttribP2ui(index: GLuint, `type`: GLenum, normalized: GLboolean, value: GLuint) {.importc.}
   proc glDrawTransformFeedbackNV(mode: GLenum, id: GLuint) {.importc.}
   proc glWindowPos2fMESA(x: GLfloat, y: GLfloat) {.importc.}
-  proc glObjectLabelKHR(identifier: GLenum, name: GLuint, length: GLsizei, label: cstring) {.importc.}
+  proc glObjectLabelKHR(identifier: GLenum, name: GLuint, length: GLsizei, label: ptr GLchar) {.importc.}
   proc glMultiTexCoord2iARB(target: GLenum, s: GLint, t: GLint) {.importc.}
   proc glVertexAttrib4usv(index: GLuint, v: ptr GLushort) {.importc.}
   proc glGetGraphicsResetStatusARB(): TGLenum {.importc.}
@@ -1593,7 +1593,7 @@ wrapErrorChecking:
   proc glMatrixTranslatefEXT(mode: GLenum, x: GLfloat, y: GLfloat, z: GLfloat) {.importc.}
   proc glColor4iv(v: ptr GLint) {.importc.}
   proc glSecondaryColor3ivEXT(v: ptr GLint) {.importc.}
-  proc glIsNamedStringARB(namelen: GLint, name: cstring): TGLboolean {.importc.}
+  proc glIsNamedStringARB(namelen: GLint, name: ptr GLchar): TGLboolean {.importc.}
   proc glVertexAttribL4dv(index: GLuint, v: ptr GLdouble) {.importc.}
   proc glEndTransformFeedback() {.importc.}
   proc glVertexStream3fvATI(stream: GLenum, coords: ptr GLfloat) {.importc.}
@@ -1607,7 +1607,7 @@ wrapErrorChecking:
   proc glMultiTexCoord3sv(target: GLenum, v: ptr GLshort) {.importc.}
   proc glVertexAttrib4Nub(index: GLuint, x: GLubyte, y: GLubyte, z: GLubyte, w: GLubyte) {.importc.}
   proc glColor3d(red: GLdouble, green: GLdouble, blue: GLdouble) {.importc.}
-  proc glGetActiveAttrib(program: GLuint, index: GLuint, bufSize: GLsizei, length: ptr GLsizei, size: ptr GLint, `type`: ptr GLenum, name: cstring) {.importc.}
+  proc glGetActiveAttrib(program: GLuint, index: GLuint, bufSize: GLsizei, length: ptr GLsizei, size: ptr GLint, `type`: ptr GLenum, name: ptr GLchar) {.importc.}
   proc glConvolutionParameterfEXT(target: GLenum, pname: GLenum, params: GLfloat) {.importc.}
   proc glTexSubImage2DEXT(target: GLenum, level: GLint, xoffset: GLint, yoffset: GLint, width: GLsizei, height: GLsizei, format: GLenum, `type`: GLenum, pixels: pointer) {.importc.}
   proc glBinormal3fvEXT(v: ptr GLfloat) {.importc.}
@@ -1690,12 +1690,12 @@ wrapErrorChecking:
   proc glStartTilingQCOM(x: GLuint, y: GLuint, width: GLuint, height: GLuint, preserveMask: GLbitfield) {.importc.}
   proc glVariantivEXT(id: GLuint, `addr`: ptr GLint) {.importc.}
   proc glGetnMinmaxARB(target: GLenum, reset: GLboolean, format: GLenum, `type`: GLenum, bufSize: GLsizei, values: pointer) {.importc.}
-  proc glTransformFeedbackVaryings(program: GLuint, count: GLsizei, varyings: cstringArray, bufferMode: GLenum) {.importc.}
+  proc glTransformFeedbackVaryings(program: GLuint, count: GLsizei, varyings: ptr ptr GLchar, bufferMode: GLenum) {.importc.}
   proc glShaderOp2EXT(op: GLenum, res: GLuint, arg1: GLuint, arg2: GLuint) {.importc.}
   proc glVertexAttribPointer(index: GLuint, size: GLint, `type`: GLenum, normalized: GLboolean, stride: GLsizei, `pointer`: pointer) {.importc.}
   proc glMultiTexCoord4dvARB(target: GLenum, v: ptr GLdouble) {.importc.}
   proc glProgramUniform1ui64NV(program: GLuint, location: GLint, x: GLuint64EXT) {.importc.}
-  proc glGetShaderSourceARB(obj: GLhandleARB, maxLength: GLsizei, length: ptr GLsizei, source: cstring) {.importc.}
+  proc glGetShaderSourceARB(obj: GLhandleARB, maxLength: GLsizei, length: ptr GLsizei, source: ptr GLcharARB) {.importc.}
   proc glGetBufferSubDataARB(target: GLenum, offset: GLintptrARB, size: GLsizeiptrARB, data: pointer) {.importc.}
   proc glCopyTexSubImage2D(target: GLenum, level: GLint, xoffset: GLint, yoffset: GLint, x: GLint, y: GLint, width: GLsizei, height: GLsizei) {.importc.}
   proc glProgramEnvParameterI4iNV(target: GLenum, index: GLuint, x: GLint, y: GLint, z: GLint, w: GLint) {.importc.}
@@ -1805,7 +1805,7 @@ wrapErrorChecking:
   proc glVertexAttribs4fvNV(index: GLuint, count: GLsizei, v: ptr GLfloat) {.importc.}
   proc glVertexAttribL3dv(index: GLuint, v: ptr GLdouble) {.importc.}
   proc glTexEnvi(target: GLenum, pname: GLenum, param: GLint) {.importc.}
-  proc glObjectPtrLabel(`ptr`: ptr pointer, length: GLsizei, label: cstring) {.importc.}
+  proc glObjectPtrLabel(`ptr`: ptr pointer, length: GLsizei, label: ptr GLchar) {.importc.}
   proc glGetTexGenfv(coord: GLenum, pname: GLenum, params: ptr GLfloat) {.importc.}
   proc glMapVertexAttrib1dAPPLE(index: GLuint, size: GLuint, u1: GLdouble, u2: GLdouble, stride: GLint, order: GLint, points: ptr GLdouble) {.importc.}
   proc glTexCoord3dv(v: ptr GLdouble) {.importc.}
@@ -1814,7 +1814,7 @@ wrapErrorChecking:
   proc glMatrixIndexPointerARB(size: GLint, `type`: GLenum, stride: GLsizei, `pointer`: pointer) {.importc.}
   proc glUniformHandleui64ARB(location: GLint, value: GLuint64) {.importc.}
   proc glUniform1fvARB(location: GLint, count: GLsizei, value: ptr GLfloat) {.importc.}
-  proc glGetActiveSubroutineUniformName(program: GLuint, shadertype: GLenum, index: GLuint, bufsize: GLsizei, length: ptr GLsizei, name: cstring) {.importc.}
+  proc glGetActiveSubroutineUniformName(program: GLuint, shadertype: GLenum, index: GLuint, bufsize: GLsizei, length: ptr GLsizei, name: ptr GLchar) {.importc.}
   proc glProgramUniformMatrix4x2fvEXT(program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: ptr GLfloat) {.importc.}
   proc glMultiTexCoord4fARB(target: GLenum, s: GLfloat, t: GLfloat, r: GLfloat, q: GLfloat) {.importc.}
   proc glGetDriverControlsQCOM(num: ptr GLint, size: GLsizei, driverControls: ptr GLuint) {.importc.}
@@ -1857,7 +1857,7 @@ wrapErrorChecking:
   proc glVertexAttrib4dARB(index: GLuint, x: GLdouble, y: GLdouble, z: GLdouble, w: GLdouble) {.importc.}
   proc glUniform3fARB(location: GLint, v0: GLfloat, v1: GLfloat, v2: GLfloat) {.importc.}
   proc glWindowPos2ivARB(v: ptr GLint) {.importc.}
-  proc glCreateShaderProgramvEXT(`type`: GLenum, count: GLsizei, strings: cstringArray): TGLuint {.importc.}
+  proc glCreateShaderProgramvEXT(`type`: GLenum, count: GLsizei, strings: ptr ptr GLchar): TGLuint {.importc.}
   proc glListParameterivSGIX(list: GLuint, pname: GLenum, params: ptr GLint) {.importc.}
   proc glGetGraphicsResetStatusEXT(): TGLenum {.importc.}
   proc glActiveShaderProgramEXT(pipeline: GLuint, program: GLuint) {.importc.}
@@ -1901,7 +1901,7 @@ wrapErrorChecking:
   proc glFramebufferTexture1DEXT(target: GLenum, attachment: GLenum, textarget: GLenum, texture: GLuint, level: GLint) {.importc.}
   proc glTangent3fEXT(tx: GLfloat, ty: GLfloat, tz: GLfloat) {.importc.}
   proc glIsVertexAttribEnabledAPPLE(index: GLuint, pname: GLenum): TGLboolean {.importc.}
-  proc glGetShaderInfoLog(shader: GLuint, bufSize: GLsizei, length: ptr GLsizei, infoLog: cstring) {.importc.}
+  proc glGetShaderInfoLog(shader: GLuint, bufSize: GLsizei, length: ptr GLsizei, infoLog: ptr GLchar) {.importc.}
   proc glFrustumx(l: GLfixed, r: GLfixed, b: GLfixed, t: GLfixed, n: GLfixed, f: GLfixed) {.importc.}
   proc glTexGenfv(coord: GLenum, pname: GLenum, params: ptr GLfloat) {.importc.}
   proc glCompressedTexImage2DARB(target: GLenum, level: GLint, internalformat: GLenum, width: GLsizei, height: GLsizei, border: GLint, imageSize: GLsizei, data: pointer) {.importc.}
@@ -2026,7 +2026,7 @@ wrapErrorChecking:
   proc glBeginConditionalRenderNV(id: GLuint, mode: GLenum) {.importc.}
   proc glEdgeFlagv(flag: ptr GLboolean) {.importc.}
   proc glReplacementCodeubSUN(code: GLubyte) {.importc.}
-  proc glObjectLabel(identifier: GLenum, name: GLuint, length: GLsizei, label: cstring) {.importc.}
+  proc glObjectLabel(identifier: GLenum, name: GLuint, length: GLsizei, label: ptr GLchar) {.importc.}
   proc glMultiTexCoord3xvOES(texture: GLenum, coords: ptr GLfixed) {.importc.}
   proc glNormal3iv(v: ptr GLint) {.importc.}
   proc glSamplerParameteri(sampler: GLuint, pname: GLenum, param: GLint) {.importc.}
@@ -2123,7 +2123,7 @@ wrapErrorChecking:
   proc glFreeObjectBufferATI(buffer: GLuint) {.importc.}
   proc glGetVideouivNV(video_slot: GLuint, pname: GLenum, params: ptr GLuint) {.importc.}
   proc glVertexAttribL4ui64NV(index: GLuint, x: GLuint64EXT, y: GLuint64EXT, z: GLuint64EXT, w: GLuint64EXT) {.importc.}
-  proc glGetUniformBlockIndex(program: GLuint, uniformBlockName: cstring): TGLuint {.importc.}
+  proc glGetUniformBlockIndex(program: GLuint, uniformBlockName: ptr GLchar): TGLuint {.importc.}
   proc glCopyMultiTexSubImage2DEXT(texunit: GLenum, target: GLenum, level: GLint, xoffset: GLint, yoffset: GLint, x: GLint, y: GLint, width: GLsizei, height: GLsizei) {.importc.}
   proc glVertex3bvOES(coords: ptr GLbyte) {.importc.}
   proc glMultiDrawElementArrayAPPLE(mode: GLenum, first: ptr GLint, count: ptr GLsizei, primcount: GLsizei) {.importc.}
@@ -2157,14 +2157,14 @@ wrapErrorChecking:
   proc glReplacementCodeuiTexCoord2fNormal3fVertex3fSUN(rc: GLuint, s: GLfloat, t: GLfloat, nx: GLfloat, ny: GLfloat, nz: GLfloat, x: GLfloat, y: GLfloat, z: GLfloat) {.importc.}
   proc glGetMultiTexEnvivEXT(texunit: GLenum, target: GLenum, pname: GLenum, params: ptr GLint) {.importc.}
   proc glGetFloatv(pname: GLenum, params: ptr GLfloat) {.importc.}
-  proc glInsertEventMarkerEXT(length: GLsizei, marker: cstring) {.importc.}
+  proc glInsertEventMarkerEXT(length: GLsizei, marker: ptr GLchar) {.importc.}
   proc glRasterPos3d(x: GLdouble, y: GLdouble, z: GLdouble) {.importc.}
   proc glNamedFramebufferRenderbufferEXT(framebuffer: GLuint, attachment: GLenum, renderbuffertarget: GLenum, renderbuffer: GLuint) {.importc.}
   proc glGetConvolutionFilter(target: GLenum, format: GLenum, `type`: GLenum, image: pointer) {.importc.}
   proc glIsOcclusionQueryNV(id: GLuint): TGLboolean {.importc.}
   proc glGetnPixelMapuivARB(map: GLenum, bufSize: GLsizei, values: ptr GLuint) {.importc.}
   proc glMapParameterfvNV(target: GLenum, pname: GLenum, params: ptr GLfloat) {.importc.}
-  proc glPushDebugGroup(source: GLenum, id: GLuint, length: GLsizei, message: cstring) {.importc.}
+  proc glPushDebugGroup(source: GLenum, id: GLuint, length: GLsizei, message: ptr GLchar) {.importc.}
   proc glMakeImageHandleResidentARB(handle: GLuint64, access: GLenum) {.importc.}
   proc glProgramUniformMatrix2fv(program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: ptr GLfloat) {.importc.}
   proc glUniform3i64vNV(location: GLint, count: GLsizei, value: ptr GLint64EXT) {.importc.}
@@ -2177,7 +2177,7 @@ wrapErrorChecking:
   proc glGetRenderbufferParameterivOES(target: GLenum, pname: GLenum, params: ptr GLint) {.importc.}
   proc glGetBufferPointerv(target: GLenum, pname: GLenum, params: ptr pointer) {.importc.}
   proc glSecondaryColor3ui(red: GLuint, green: GLuint, blue: GLuint) {.importc.}
-  proc glGetDebugMessageLog(count: GLuint, bufsize: GLsizei, sources: ptr GLenum, types: ptr GLenum, ids: ptr GLuint, severities: ptr GLenum, lengths: ptr GLsizei, messageLog: cstring): TGLuint {.importc.}
+  proc glGetDebugMessageLog(count: GLuint, bufsize: GLsizei, sources: ptr GLenum, types: ptr GLenum, ids: ptr GLuint, severities: ptr GLenum, lengths: ptr GLsizei, messageLog: ptr GLchar): TGLuint {.importc.}
   proc glNormal3i(nx: GLint, ny: GLint, nz: GLint) {.importc.}
   proc glTestFenceNV(fence: GLuint): TGLboolean {.importc.}
   proc glSecondaryColor3usv(v: ptr GLushort) {.importc.}
@@ -2289,7 +2289,7 @@ wrapErrorChecking:
   proc glTranslated(x: GLdouble, y: GLdouble, z: GLdouble) {.importc.}
   proc glColorPointer(size: GLint, `type`: GLenum, stride: GLsizei, `pointer`: pointer) {.importc.}
   proc glDrawElementsInstancedBaseVertex(mode: GLenum, count: GLsizei, `type`: GLenum, indices: pointer, instancecount: GLsizei, basevertex: GLint) {.importc.}
-  proc glBindAttribLocationARB(programObj: GLhandleARB, index: GLuint, name: cstring) {.importc.}
+  proc glBindAttribLocationARB(programObj: GLhandleARB, index: GLuint, name: ptr GLcharARB) {.importc.}
   proc glTexGendv(coord: GLenum, pname: GLenum, params: ptr GLdouble) {.importc.}
   proc glGetPathCoordsNV(path: GLuint, coords: ptr GLfloat) {.importc.}
   proc glGetMapParameterivNV(target: GLenum, pname: GLenum, params: ptr GLint) {.importc.}
@@ -2322,7 +2322,7 @@ wrapErrorChecking:
   proc glGetBufferPointervARB(target: GLenum, pname: GLenum, params: ptr pointer) {.importc.}
   proc glGetMultiTexLevelParameterfvEXT(texunit: GLenum, target: GLenum, level: GLint, pname: GLenum, params: ptr GLfloat) {.importc.}
   proc glMultiTexParameterIuivEXT(texunit: GLenum, target: GLenum, pname: GLenum, params: ptr GLuint) {.importc.}
-  proc glGetShaderSource(shader: GLuint, bufSize: GLsizei, length: ptr GLsizei, source: cstring) {.importc.}
+  proc glGetShaderSource(shader: GLuint, bufSize: GLsizei, length: ptr GLsizei, source: ptr GLchar) {.importc.}
   proc glStencilFunc(func: GLenum, `ref`: GLint, mask: GLuint) {.importc.}
   proc glVertexAttribI4bvEXT(index: GLuint, v: ptr GLbyte) {.importc.}
   proc glVertexAttrib4NuivARB(index: GLuint, v: ptr GLuint) {.importc.}
@@ -2337,7 +2337,7 @@ wrapErrorChecking:
   proc glTextureStorage2DMultisampleEXT(texture: GLuint, target: GLenum, samples: GLsizei, internalformat: GLenum, width: GLsizei, height: GLsizei, fixedsamplelocations: GLboolean) {.importc.}
   proc glGetHistogramParameterxvOES(target: GLenum, pname: GLenum, params: ptr GLfixed) {.importc.}
   proc glVertexAttrib4dNV(index: GLuint, x: GLdouble, y: GLdouble, z: GLdouble, w: GLdouble) {.importc.}
-  proc glGetPerfMonitorCounterStringAMD(group: GLuint, counter: GLuint, bufSize: GLsizei, length: ptr GLsizei, counterString: cstring) {.importc.}
+  proc glGetPerfMonitorCounterStringAMD(group: GLuint, counter: GLuint, bufSize: GLsizei, length: ptr GLsizei, counterString: ptr GLchar) {.importc.}
   proc glMultiTexCoord2sARB(target: GLenum, s: GLshort, t: GLshort) {.importc.}
   proc glSpriteParameterivSGIX(pname: GLenum, params: ptr GLint) {.importc.}
   proc glCompressedTextureImage3DEXT(texture: GLuint, target: GLenum, level: GLint, internalformat: GLenum, width: GLsizei, height: GLsizei, depth: GLsizei, border: GLint, imageSize: GLsizei, bits: pointer) {.importc.}
@@ -2348,7 +2348,7 @@ wrapErrorChecking:
   proc glProgramParameteri(program: GLuint, pname: GLenum, value: GLint) {.importc.}
   proc glGetLocalConstantIntegervEXT(id: GLuint, value: GLenum, data: ptr GLint) {.importc.}
   proc glFragmentMaterialiSGIX(face: GLenum, pname: GLenum, param: GLint) {.importc.}
-  proc glGetNamedStringivARB(namelen: GLint, name: cstring, pname: GLenum, params: ptr GLint) {.importc.}
+  proc glGetNamedStringivARB(namelen: GLint, name: ptr GLchar, pname: GLenum, params: ptr GLint) {.importc.}
   proc glBinormal3ivEXT(v: ptr GLint) {.importc.}
   proc glCheckFramebufferStatusEXT(target: GLenum): TGLenum {.importc.}
   proc glVertexAttrib1fNV(index: GLuint, x: GLfloat) {.importc.}
@@ -2362,7 +2362,7 @@ wrapErrorChecking:
   proc glBeginTransformFeedbackEXT(primitiveMode: GLenum) {.importc.}
   proc glBufferAddressRangeNV(pname: GLenum, index: GLuint, address: GLuint64EXT, length: GLsizeiptr) {.importc.}
   proc glPointParameterfvARB(pname: GLenum, params: ptr GLfloat) {.importc.}
-  proc glGetActiveVaryingNV(program: GLuint, index: GLuint, bufSize: GLsizei, length: ptr GLsizei, size: ptr GLsizei, `type`: ptr GLenum, name: cstring) {.importc.}
+  proc glGetActiveVaryingNV(program: GLuint, index: GLuint, bufSize: GLsizei, length: ptr GLsizei, size: ptr GLsizei, `type`: ptr GLenum, name: ptr GLchar) {.importc.}
   proc glIndexMask(mask: GLuint) {.importc.}
   proc glVertexAttribBinding(attribindex: GLuint, bindingindex: GLuint) {.importc.}
   proc glDeleteFencesNV(n: GLsizei, fences: ptr GLuint) {.importc.}
@@ -2432,7 +2432,7 @@ wrapErrorChecking:
   proc glMapControlPointsNV(target: GLenum, index: GLuint, `type`: GLenum, ustride: GLsizei, vstride: GLsizei, uorder: GLint, vorder: GLint, packed: GLboolean, points: pointer) {.importc.}
   proc glGetBufferParameteriv(target: GLenum, pname: GLenum, params: ptr GLint) {.importc.}
   proc glUnmapObjectBufferATI(buffer: GLuint) {.importc.}
-  proc glGetProgramResourceLocation(program: GLuint, programInterface: GLenum, name: cstring): TGLint {.importc.}
+  proc glGetProgramResourceLocation(program: GLuint, programInterface: GLenum, name: ptr GLchar): TGLint {.importc.}
   proc glUniform4i64vNV(location: GLint, count: GLsizei, value: ptr GLint64EXT) {.importc.}
   proc glImageTransformParameterfHP(target: GLenum, pname: GLenum, param: GLfloat) {.importc.}
   proc glArrayObjectATI(`array`: GLenum, size: GLint, `type`: GLenum, stride: GLsizei, buffer: GLuint, offset: GLuint) {.importc.}
@@ -2442,7 +2442,7 @@ wrapErrorChecking:
   proc glListParameteriSGIX(list: GLuint, pname: GLenum, param: GLint) {.importc.}
   proc glProgramUniformMatrix2dvEXT(program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: ptr GLdouble) {.importc.}
   proc glProgramUniform2i64vNV(program: GLuint, location: GLint, count: GLsizei, value: ptr GLint64EXT) {.importc.}
-  proc glObjectPtrLabelKHR(`ptr`: ptr pointer, length: GLsizei, label: cstring) {.importc.}
+  proc glObjectPtrLabelKHR(`ptr`: ptr pointer, length: GLsizei, label: ptr GLchar) {.importc.}
   proc glVertexAttribL1i64NV(index: GLuint, x: GLint64EXT) {.importc.}
   proc glMultiTexBufferEXT(texunit: GLenum, target: GLenum, internalformat: GLenum, buffer: GLuint) {.importc.}
   proc glCoverFillPathInstancedNV(numPaths: GLsizei, pathNameType: GLenum, paths: pointer, pathBase: GLuint, coverMode: GLenum, transformType: GLenum, transformValues: ptr GLfloat) {.importc.}
@@ -2461,7 +2461,7 @@ wrapErrorChecking:
   proc glGetBooleanv(pname: GLenum, params: ptr GLboolean) {.importc.}
   proc glTangent3ivEXT(v: ptr GLint) {.importc.}
   proc glTexImage3DMultisample(target: GLenum, samples: GLsizei, internalformat: GLint, width: GLsizei, height: GLsizei, depth: GLsizei, fixedsamplelocations: GLboolean) {.importc.}
-  proc glGetUniformIndices(program: GLuint, uniformCount: GLsizei, uniformNames: cstringArray, uniformIndices: ptr GLuint) {.importc.}
+  proc glGetUniformIndices(program: GLuint, uniformCount: GLsizei, uniformNames: ptr ptr GLchar, uniformIndices: ptr GLuint) {.importc.}
   proc glVDPAUInitNV(vdpDevice: pointer, getProcAddress: pointer) {.importc.}
   proc glGetMinmaxParameterivEXT(target: GLenum, pname: GLenum, params: ptr GLint) {.importc.}
   proc glMultiTexCoord2fvARB(target: GLenum, v: ptr GLfloat) {.importc.}
@@ -2473,18 +2473,18 @@ wrapErrorChecking:
   proc glGetInstrumentsSGIX(): TGLint {.importc.}
   proc glFramebufferParameteri(target: GLenum, pname: GLenum, param: GLint) {.importc.}
   proc glPathCoverDepthFuncNV(func: GLenum) {.importc.}
-  proc glGetTranslatedShaderSourceANGLE(shader: GLuint, bufsize: GLsizei, length: ptr GLsizei, source: cstring) {.importc.}
+  proc glGetTranslatedShaderSourceANGLE(shader: GLuint, bufsize: GLsizei, length: ptr GLsizei, source: ptr GLchar) {.importc.}
   proc glIndexfv(c: ptr GLfloat) {.importc.}
-  proc glGetActiveUniformBlockName(program: GLuint, uniformBlockIndex: GLuint, bufSize: GLsizei, length: ptr GLsizei, uniformBlockName: cstring) {.importc.}
+  proc glGetActiveUniformBlockName(program: GLuint, uniformBlockIndex: GLuint, bufSize: GLsizei, length: ptr GLsizei, uniformBlockName: ptr GLchar) {.importc.}
   proc glNormal3s(nx: GLshort, ny: GLshort, nz: GLshort) {.importc.}
   proc glColorFragmentOp3ATI(op: GLenum, dst: GLuint, dstMask: GLuint, dstMod: GLuint, arg1: GLuint, arg1Rep: GLuint, arg1Mod: GLuint, arg2: GLuint, arg2Rep: GLuint, arg2Mod: GLuint, arg3: GLuint, arg3Rep: GLuint, arg3Mod: GLuint) {.importc.}
-  proc glGetProgramResourceLocationIndex(program: GLuint, programInterface: GLenum, name: cstring): TGLint {.importc.}
+  proc glGetProgramResourceLocationIndex(program: GLuint, programInterface: GLenum, name: ptr GLchar): TGLint {.importc.}
   proc glGetBooleanIndexedvEXT(target: GLenum, index: GLuint, data: ptr GLboolean) {.importc.}
   proc glGenPerfMonitorsAMD(n: GLsizei, monitors: ptr GLuint) {.importc.}
   proc glDrawRangeElementsEXT(mode: GLenum, start: GLuint, `end`: GLuint, count: GLsizei, `type`: GLenum, indices: pointer) {.importc.}
   proc glFramebufferTexture3D(target: GLenum, attachment: GLenum, textarget: GLenum, texture: GLuint, level: GLint, zoffset: GLint) {.importc.}
   proc glGetTexParameterxvOES(target: GLenum, pname: GLenum, params: ptr GLfixed) {.importc.}
-  proc glCompileShaderIncludeARB(shader: GLuint, count: GLsizei, path: cstringArray, length: ptr GLint) {.importc.}
+  proc glCompileShaderIncludeARB(shader: GLuint, count: GLsizei, path: ptr ptr GLchar, length: ptr GLint) {.importc.}
   proc glGetMultiTexParameterfvEXT(texunit: GLenum, target: GLenum, pname: GLenum, params: ptr GLfloat) {.importc.}
   proc glEvalPoint2(i: GLint, j: GLint) {.importc.}
   proc glGetProgramivNV(id: GLuint, pname: GLenum, params: ptr GLint) {.importc.}
@@ -2498,7 +2498,7 @@ wrapErrorChecking:
   proc glProgramUniformMatrix3x4dv(program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: ptr GLdouble) {.importc.}
   proc glGetFloati_vEXT(pname: GLenum, index: GLuint, params: ptr GLfloat) {.importc.}
   proc glGetObjectParameterivAPPLE(objectType: GLenum, name: GLuint, pname: GLenum, params: ptr GLint) {.importc.}
-  proc glPushGroupMarkerEXT(length: GLsizei, marker: cstring) {.importc.}
+  proc glPushGroupMarkerEXT(length: GLsizei, marker: ptr GLchar) {.importc.}
   proc glProgramUniform4uivEXT(program: GLuint, location: GLint, count: GLsizei, value: ptr GLuint) {.importc.}
   proc glReplacementCodeuiVertex3fSUN(rc: GLuint, x: GLfloat, y: GLfloat, z: GLfloat) {.importc.}
   proc glTexSubImage1DEXT(target: GLenum, level: GLint, xoffset: GLint, width: GLsizei, format: GLenum, `type`: GLenum, pixels: pointer) {.importc.}
@@ -2571,7 +2571,7 @@ wrapErrorChecking:
   proc glTexCoord4bOES(s: GLbyte, t: GLbyte, r: GLbyte, q: GLbyte) {.importc.}
   proc glSecondaryColor3us(red: GLushort, green: GLushort, blue: GLushort) {.importc.}
   proc glGlobalAlphaFactorubSUN(factor: GLubyte) {.importc.}
-  proc glNamedStringARB(`type`: GLenum, namelen: GLint, name: cstring, stringlen: GLint, string: cstring) {.importc.}
+  proc glNamedStringARB(`type`: GLenum, namelen: GLint, name: ptr GLchar, stringlen: GLint, string: ptr GLchar) {.importc.}
   proc glGetAttachedShaders(program: GLuint, maxCount: GLsizei, count: ptr GLsizei, shaders: ptr GLuint) {.importc.}
   proc glMatrixRotatefEXT(mode: GLenum, angle: GLfloat, x: GLfloat, y: GLfloat, z: GLfloat) {.importc.}
   proc glVertexStream3ivATI(stream: GLenum, coords: ptr GLint) {.importc.}
@@ -2643,12 +2643,12 @@ wrapErrorChecking:
   proc glIsQuery(id: GLuint): TGLboolean {.importc.}
   proc glFogxv(pname: GLenum, param: ptr GLfixed) {.importc.}
   proc glAreProgramsResidentNV(n: GLsizei, programs: ptr GLuint, residences: ptr GLboolean): TGLboolean {.importc.}
-  proc glShaderSourceARB(shaderObj: GLhandleARB, count: GLsizei, string: cstringArray, length: ptr GLint) {.importc.}
+  proc glShaderSourceARB(shaderObj: GLhandleARB, count: GLsizei, string: ptr ptr GLcharARB, length: ptr GLint) {.importc.}
   proc glPointSizexOES(size: GLfixed) {.importc.}
   proc glPixelTransferf(pname: GLenum, param: GLfloat) {.importc.}
   proc glExtractComponentEXT(res: GLuint, src: GLuint, num: GLuint) {.importc.}
   proc glUniform1fv(location: GLint, count: GLsizei, value: ptr GLfloat) {.importc.}
-  proc glGetNamedStringARB(namelen: GLint, name: cstring, bufSize: GLsizei, stringlen: ptr GLint, string: cstring) {.importc.}
+  proc glGetNamedStringARB(namelen: GLint, name: ptr GLchar, bufSize: GLsizei, stringlen: ptr GLint, string: ptr GLchar) {.importc.}
   proc glGetProgramBinaryOES(program: GLuint, bufSize: GLsizei, length: ptr GLsizei, binaryFormat: ptr GLenum, binary: pointer) {.importc.}
   proc glDeleteOcclusionQueriesNV(n: GLsizei, ids: ptr GLuint) {.importc.}
   proc glEnableClientState(`array`: GLenum) {.importc.}
@@ -2693,14 +2693,14 @@ wrapErrorChecking:
   proc glIndexub(c: GLubyte) {.importc.}
   proc glVertexP2uiv(`type`: GLenum, value: ptr GLuint) {.importc.}
   proc glProgramUniform1uiv(program: GLuint, location: GLint, count: GLsizei, value: ptr GLuint) {.importc.}
-  proc glDebugMessageInsertKHR(source: GLenum, `type`: GLenum, id: GLuint, severity: GLenum, length: GLsizei, buf: cstring) {.importc.}
+  proc glDebugMessageInsertKHR(source: GLenum, `type`: GLenum, id: GLuint, severity: GLenum, length: GLsizei, buf: ptr GLchar) {.importc.}
   proc glColor4b(red: GLbyte, green: GLbyte, blue: GLbyte, alpha: GLbyte) {.importc.}
   proc glRenderbufferStorageMultisampleAPPLE(target: GLenum, samples: GLsizei, internalformat: GLenum, width: GLsizei, height: GLsizei) {.importc.}
   proc glMinSampleShading(value: GLfloat) {.importc.}
   proc glBindProgramNV(target: GLenum, id: GLuint) {.importc.}
   proc glWindowPos3dMESA(x: GLdouble, y: GLdouble, z: GLdouble) {.importc.}
   proc glEdgeFlagPointer(stride: GLsizei, `pointer`: pointer) {.importc.}
-  proc glGetFragDataIndex(program: GLuint, name: cstring): TGLint {.importc.}
+  proc glGetFragDataIndex(program: GLuint, name: ptr GLchar): TGLint {.importc.}
   proc glTexCoord3hNV(s: GLhalfNV, t: GLhalfNV, r: GLhalfNV) {.importc.}
   proc glMultiDrawArraysIndirectAMD(mode: GLenum, indirect: pointer, primcount: GLsizei, stride: GLsizei) {.importc.}
   proc glFragmentColorMaterialSGIX(face: GLenum, mode: GLenum) {.importc.}
@@ -2746,7 +2746,7 @@ wrapErrorChecking:
   proc glWindowPos3iv(v: ptr GLint) {.importc.}
   proc glProgramUniform4ui64NV(program: GLuint, location: GLint, x: GLuint64EXT, y: GLuint64EXT, z: GLuint64EXT, w: GLuint64EXT) {.importc.}
   proc glProgramUniform2d(program: GLuint, location: GLint, v0: GLdouble, v1: GLdouble) {.importc.}
-  proc glDebugMessageInsertARB(source: GLenum, `type`: GLenum, id: GLuint, severity: GLenum, length: GLsizei, buf: cstring) {.importc.}
+  proc glDebugMessageInsertARB(source: GLenum, `type`: GLenum, id: GLuint, severity: GLenum, length: GLsizei, buf: ptr GLchar) {.importc.}
   proc glMultiTexSubImage3DEXT(texunit: GLenum, target: GLenum, level: GLint, xoffset: GLint, yoffset: GLint, zoffset: GLint, width: GLsizei, height: GLsizei, depth: GLsizei, format: GLenum, `type`: GLenum, pixels: pointer) {.importc.}
   proc glMap1d(target: GLenum, u1: GLdouble, u2: GLdouble, stride: GLint, order: GLint, points: ptr GLdouble) {.importc.}
   proc glDeleteShader(shader: GLuint) {.importc.}
@@ -2778,7 +2778,7 @@ wrapErrorChecking:
   proc glGetVertexArrayIntegeri_vEXT(vaobj: GLuint, index: GLuint, pname: GLenum, param: ptr GLint) {.importc.}
   proc glReadnPixelsEXT(x: GLint, y: GLint, width: GLsizei, height: GLsizei, format: GLenum, `type`: GLenum, bufSize: GLsizei, data: pointer) {.importc.}
   proc glMultiTexImage1DEXT(texunit: GLenum, target: GLenum, level: GLint, internalformat: GLint, width: GLsizei, border: GLint, format: GLenum, `type`: GLenum, pixels: pointer) {.importc.}
-  proc glGetVaryingLocationNV(program: GLuint, name: cstring): TGLint {.importc.}
+  proc glGetVaryingLocationNV(program: GLuint, name: ptr GLchar): TGLint {.importc.}
   proc glMultiTexCoord4fvARB(target: GLenum, v: ptr GLfloat) {.importc.}
   proc glMultiTexCoord3iv(target: GLenum, v: ptr GLint) {.importc.}
   proc glVertexAttribL2dvEXT(index: GLuint, v: ptr GLdouble) {.importc.}
@@ -2791,7 +2791,7 @@ wrapErrorChecking:
   proc glProgramUniform3ui64vNV(program: GLuint, location: GLint, count: GLsizei, value: ptr GLuint64EXT) {.importc.}
   proc glTexCoord2fColor3fVertex3fvSUN(tc: ptr GLfloat, c: ptr GLfloat, v: ptr GLfloat) {.importc.}
   proc glProgramUniform3fv(program: GLuint, location: GLint, count: GLsizei, value: ptr GLfloat) {.importc.}
-  proc glBindFragDataLocationIndexed(program: GLuint, colorNumber: GLuint, index: GLuint, name: cstring) {.importc.}
+  proc glBindFragDataLocationIndexed(program: GLuint, colorNumber: GLuint, index: GLuint, name: ptr GLchar) {.importc.}
   proc glGetnSeparableFilterARB(target: GLenum, format: GLenum, `type`: GLenum, rowBufSize: GLsizei, row: pointer, columnBufSize: GLsizei, column: pointer, span: pointer) {.importc.}
   proc glTextureParameteriEXT(texture: GLuint, target: GLenum, pname: GLenum, param: GLint) {.importc.}
   proc glGetUniformuivEXT(program: GLuint, location: GLint, params: ptr GLuint) {.importc.}
@@ -2809,12 +2809,12 @@ wrapErrorChecking:
   proc glTexCoord2fColor4fNormal3fVertex3fvSUN(tc: ptr GLfloat, c: ptr GLfloat, n: ptr GLfloat, v: ptr GLfloat) {.importc.}
   proc glMultiTexCoord3s(target: GLenum, s: GLshort, t: GLshort, r: GLshort) {.importc.}
   proc glMultTransposeMatrixd(m: ptr GLdouble) {.importc.}
-  proc glActiveVaryingNV(program: GLuint, name: cstring) {.importc.}
+  proc glActiveVaryingNV(program: GLuint, name: ptr GLchar) {.importc.}
   proc glProgramUniform1f(program: GLuint, location: GLint, v0: GLfloat) {.importc.}
-  proc glGetActiveSubroutineName(program: GLuint, shadertype: GLenum, index: GLuint, bufsize: GLsizei, length: ptr GLsizei, name: cstring) {.importc.}
+  proc glGetActiveSubroutineName(program: GLuint, shadertype: GLenum, index: GLuint, bufsize: GLsizei, length: ptr GLsizei, name: ptr GLchar) {.importc.}
   proc glClipPlanex(plane: GLenum, equation: ptr GLfixed) {.importc.}
   proc glMultiTexCoord4iv(target: GLenum, v: ptr GLint) {.importc.}
-  proc glTransformFeedbackVaryingsEXT(program: GLuint, count: GLsizei, varyings: cstringArray, bufferMode: GLenum) {.importc.}
+  proc glTransformFeedbackVaryingsEXT(program: GLuint, count: GLsizei, varyings: ptr ptr GLchar, bufferMode: GLenum) {.importc.}
   proc glBlendEquationSeparateiARB(buf: GLuint, modeRGB: GLenum, modeAlpha: GLenum) {.importc.}
   proc glVertex2sv(v: ptr GLshort) {.importc.}
   proc glAccumxOES(op: GLenum, value: GLfixed) {.importc.}
@@ -2894,7 +2894,7 @@ wrapErrorChecking:
   proc glPointParameterivNV(pname: GLenum, params: ptr GLint) {.importc.}
   proc glBlitFramebufferANGLE(srcX0: GLint, srcY0: GLint, srcX1: GLint, srcY1: GLint, dstX0: GLint, dstY0: GLint, dstX1: GLint, dstY1: GLint, mask: GLbitfield, filter: GLenum) {.importc.}
   proc glGetObjectParameterivARB(obj: GLhandleARB, pname: GLenum, params: ptr GLint) {.importc.}
-  proc glGetSubroutineIndex(program: GLuint, shadertype: GLenum, name: cstring): TGLuint {.importc.}
+  proc glGetSubroutineIndex(program: GLuint, shadertype: GLenum, name: ptr GLchar): TGLuint {.importc.}
   proc glMap2d(target: GLenum, u1: GLdouble, u2: GLdouble, ustride: GLint, uorder: GLint, v1: GLdouble, v2: GLdouble, vstride: GLint, vorder: GLint, points: ptr GLdouble) {.importc.}
   proc glRectfv(v1: ptr GLfloat, v2: ptr GLfloat) {.importc.}
   proc glDepthRangeArrayv(first: GLuint, count: GLsizei, v: ptr GLdouble) {.importc.}
@@ -2951,7 +2951,7 @@ wrapErrorChecking:
   proc glEndQuery(target: GLenum) {.importc.}
   proc glBlitFramebufferEXT(srcX0: GLint, srcY0: GLint, srcX1: GLint, srcY1: GLint, dstX0: GLint, dstY0: GLint, dstX1: GLint, dstY1: GLint, mask: GLbitfield, filter: GLenum) {.importc.}
   proc glProgramEnvParametersI4uivNV(target: GLenum, index: GLuint, count: GLsizei, params: ptr GLuint) {.importc.}
-  proc glGetActiveUniform(program: GLuint, index: GLuint, bufSize: GLsizei, length: ptr GLsizei, size: ptr GLint, `type`: ptr GLenum, name: cstring) {.importc.}
+  proc glGetActiveUniform(program: GLuint, index: GLuint, bufSize: GLsizei, length: ptr GLsizei, size: ptr GLint, `type`: ptr GLenum, name: ptr GLchar) {.importc.}
   proc glGenAsyncMarkersSGIX(range: GLsizei): TGLuint {.importc.}
   proc glClipControlARB(origin: GLenum, depth: GLenum) {.importc.}
   proc glDrawElementsInstancedEXT(mode: GLenum, count: GLsizei, `type`: GLenum, indices: pointer, primcount: GLsizei) {.importc.}
@@ -2970,7 +2970,7 @@ wrapErrorChecking:
   proc glProgramParameter4dvNV(target: GLenum, index: GLuint, v: ptr GLdouble) {.importc.}
   proc glDeleteBuffers(n: GLsizei, buffers: ptr GLuint) {.importc.}
   proc glGetVertexArrayIntegervEXT(vaobj: GLuint, pname: GLenum, param: ptr GLint) {.importc.}
-  proc glBindFragDataLocationEXT(program: GLuint, color: GLuint, name: cstring) {.importc.}
+  proc glBindFragDataLocationEXT(program: GLuint, color: GLuint, name: ptr GLchar) {.importc.}
   proc glGenProgramsNV(n: GLsizei, programs: ptr GLuint) {.importc.}
   proc glMultiTexCoord1i(target: GLenum, s: GLint) {.importc.}
   proc glCompressedTexImage3DOES(target: GLenum, level: GLint, internalformat: GLenum, width: GLsizei, height: GLsizei, depth: GLsizei, border: GLint, imageSize: GLsizei, data: pointer) {.importc.}
@@ -2988,7 +2988,7 @@ wrapErrorChecking:
   proc glTexGenivOES(coord: GLenum, pname: GLenum, params: ptr GLint) {.importc.}
   proc glIsFramebufferOES(framebuffer: GLuint): TGLboolean {.importc.}
   proc glColor4ubv(v: ptr GLubyte) {.importc.}
-  proc glDeleteNamedStringARB(namelen: GLint, name: cstring) {.importc.}
+  proc glDeleteNamedStringARB(namelen: GLint, name: ptr GLchar) {.importc.}
   proc glCopyConvolutionFilter1DEXT(target: GLenum, internalformat: GLenum, x: GLint, y: GLint, width: GLsizei) {.importc.}
   proc glBufferStorage(target: GLenum, size: GLsizeiptr, data: ptr pointer, flags: GLbitfield) {.importc.}
   proc glDrawTexiOES(x: GLint, y: GLint, z: GLint, width: GLint, height: GLint) {.importc.}
@@ -3140,7 +3140,7 @@ wrapErrorChecking:
   proc glReplacementCodeuiTexCoord2fColor4fNormal3fVertex3fSUN(rc: GLuint, s: GLfloat, t: GLfloat, r: GLfloat, g: GLfloat, b: GLfloat, a: GLfloat, nx: GLfloat, ny: GLfloat, nz: GLfloat, x: GLfloat, y: GLfloat, z: GLfloat) {.importc.}
   proc glSampleMapATI(dst: GLuint, interp: GLuint, swizzle: GLenum) {.importc.}
   proc glProgramUniform1d(program: GLuint, location: GLint, v0: GLdouble) {.importc.}
-  proc glBindAttribLocation(program: GLuint, index: GLuint, name: cstring) {.importc.}
+  proc glBindAttribLocation(program: GLuint, index: GLuint, name: ptr GLchar) {.importc.}
   proc glGetCombinerStageParameterfvNV(stage: GLenum, pname: GLenum, params: ptr GLfloat) {.importc.}
   proc glTexSubImage4DSGIS(target: GLenum, level: GLint, xoffset: GLint, yoffset: GLint, zoffset: GLint, woffset: GLint, width: GLsizei, height: GLsizei, depth: GLsizei, size4d: GLsizei, format: GLenum, `type`: GLenum, pixels: pointer) {.importc.}
   proc glGetMapAttribParameterfvNV(target: GLenum, index: GLuint, pname: GLenum, params: ptr GLfloat) {.importc.}
@@ -3163,9 +3163,10 @@ wrapErrorChecking:
   proc glColorTable(target: GLenum, internalformat: GLenum, width: GLsizei, format: GLenum, `type`: GLenum, table: pointer) {.importc.}
   proc glProgramUniformMatrix2x3dv(program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: ptr GLdouble) {.importc.}
 {.pop.} # stdcall, hint[XDeclaredButNotUsed]: off.
-
 const
   cGL_UNSIGNED_BYTE* = 0x1401
+  cGL_UNSIGNED_SHORT* = 0x1403
+
   GL_2X_BIT_ATI* = 0x00000001
   GL_MODELVIEW6_ARB* = 0x8726
   GL_CULL_FACE_MODE* = 0x0B45
