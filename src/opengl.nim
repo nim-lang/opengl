@@ -110,6 +110,7 @@ type
   GLubyte* = uint8
   GLushort* = uint16
   GLuint* = uint32
+  GLhandle* = GLuint
   GLsizei* = int32
   GLfloat* = float32
   GLclampf* = float32
