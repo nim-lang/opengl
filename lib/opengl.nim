@@ -3075,7 +3075,8 @@ wrapErrorChecking:
   proc glVertexAttribPointerNV(index: TGLuint, fsize: TGLint, `type`: TGLenum, stride: TGLsizei, `pointer`: pointer) {.importc: "glVertexAttribPointerNV", ogl.}
   proc glColorTable(target: TGLenum, internalformat: TGLenum, width: TGLsizei, format: TGLenum, `type`: TGLenum, table: pointer) {.importc: "glColorTable", ogl.}
   proc glProgramUniformMatrix2x3dv(program: TGLuint, location: TGLint, count: TGLsizei, transpose: TGLboolean, value: TGLdouble) {.importc: "glProgramUniformMatrix2x3dv", ogl.}
-{.pop.} # stdcall, errCheck.
+{.pop.} # stdcall.
+
 const
   GL_2X_BIT_ATI* = 0x00000001
   GL_MODELVIEW6_ARB* = 0x8726
@@ -8084,6 +8085,3 @@ const
   GL_XOR* = 0x1506
   GL_VIDEO_CAPTURE_FRAME_WIDTH_NV* = 0x9038
   GL_RGBA* = 0x1908
-
-loadExtensions()
-glEnable(47843784)
