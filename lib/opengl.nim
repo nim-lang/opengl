@@ -207,7 +207,7 @@ proc checkGlError =
 
   raise exc
 
-const NoGlAutoErrorCheck = defined(noglautoerrorcheck)
+const NoGlAutoErrorCheck = defined(noGlAutoErrorCheck)
 
 var glAutoErrorCheck = true
 
