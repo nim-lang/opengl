@@ -3164,6 +3164,7 @@ wrapErrorChecking:
 {.pop.} # stdcall, hint[XDeclaredButNotUsed]: off.
 
 const
+  cGL_UNSIGNED_BYTE = 0x1401
   GL_2X_BIT_ATI* = 0x00000001
   GL_MODELVIEW6_ARB* = 0x8726
   GL_CULL_FACE_MODE* = 0x0B45
