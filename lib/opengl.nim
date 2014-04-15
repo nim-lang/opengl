@@ -188,7 +188,7 @@ proc getGlError*: TGlError = glGetError().TGlError
 
 type
   E_GL* = object of E_Base
-    code: TGlError
+    code*: TGlError
 
 proc checkGlError =
   let error = getGlError()
