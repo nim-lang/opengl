@@ -225,9 +225,7 @@ macro wrapErrorChecking(f: stmt): stmt =
     glProc.pragma = newNimNode(nnkPragma).add(
         newNimNode(nnkExprColonExpr).add(
           ident"importc" , newLit($child.name))
-      ).add(
-        ident"inline").add(
-        ident"ogl")
+      ).add(ident"ogl")
 
     glProc.name = ident($glProc.name & "Impl")
     var
@@ -251,11 +249,12 @@ macro wrapErrorChecking(f: stmt): stmt =
     body.add getAst(errCheck())
 
     var procc = newProc(child.name, params, body)
+    procc.pragma = newNimNode(nnkPragma).add(ident"inline")
     procc.name = postfix(procc.name, "*")
     result.add procc
 
 {.deadCodeElim: on.}
-{.push stdcall.}
+{.push stdcall, hint[XDeclaredButNotUsed]: off.}
 wrapErrorChecking:
   proc glMultiTexCoord2d(target: TGLenum, s: TGLdouble, t: TGLdouble) {.importc.}
   proc glDrawElementsIndirect(mode: TGLenum, `type`: TGLenum, indirect: pointer) {.importc.}
@@ -3075,7 +3074,7 @@ wrapErrorChecking:
   proc glVertexAttribPointerNV(index: TGLuint, fsize: TGLint, `type`: TGLenum, stride: TGLsizei, `pointer`: pointer) {.importc.}
   proc glColorTable(target: TGLenum, internalformat: TGLenum, width: TGLsizei, format: TGLenum, `type`: TGLenum, table: pointer) {.importc.}
   proc glProgramUniformMatrix2x3dv(program: TGLuint, location: TGLint, count: TGLsizei, transpose: TGLboolean, value: TGLdouble) {.importc.}
-{.pop.} # stdcall.
+{.pop.} # stdcall, hint[XDeclaredButNotUsed]: off.
 
 const
   GL_2X_BIT_ATI* = 0x00000001
