@@ -269,37 +269,48 @@ type
     gleOutOfMem = (0x0505, "out of memory")
     gleInvalidFramebufferOperation = (0x0506, "invalid framebuffer operation")
     gleTableTooLarge = (0x8031, "table too large")
-    gleUnknown = (0x384623812, "unknown")
 
 proc glGetError*: TGLenum {.stdcall, importc, ogl.}
 proc getGlError*: TGlError = glGetError().TGlError
+  ## Like `glGetError` but returns an enumerator instead.
 
 type
   E_GL* = object of E_Base
-    code*: TGlError
+    ## An exception for OpenGL errors.
+    code*: TGlError ## The error code. This might be invalid for two reasons:
+                    ## an outdated list of errors or a bad driver.
 
-proc checkGlError =
+proc checkGlError* =
+  ## Raise `E_GL` if the last call to an OpenGL function generated an error.
+  ## You might want to call this once every frame for example if automatic
+  ## error checking has been disabled.
   let error = getGlError()
   if error == gleNoError:
     return
 
   var
     exc = new(E_GL)
-  exc.code = gleUnknown
-  exc.msg = "OpenGL error: unknown"
   for e in TGlError:
-    if e == error and e != gleUnknown:
+    if e == error:
       exc.msg = "OpenGL error: " & $e
-      exc.code = e
-      break
+      raise exc
 
+  exc.code = error
+  exc.msg = "OpenGL error: unknown (" & $error & ")"
   raise exc
 
-const NoGlAutoErrorCheck = defined(noGlAutoErrorCheck)
+const
+  NoGlAutoErrorCheck* = defined(noGlAutoErrorCheck) #\
+    ## This determines whether an exception should be raised if an OpenGL call
+    ## generates an error. No additional code will be generated when
+    ## `noGlAutoErrorCheck` has been defined.
 
 var glAutoErrorCheck = true
 
 proc enableGlAutoErrorCheck*(yes: bool) =
+  ## This determines whether an exception should be raised if an OpenGL call
+  ## generates an error. This has no effect when
+  ## ``NoGlAutoErrorCheck == true``.
   glAutoErrorCheck = yes
 
 macro wrapErrorChecking(f: stmt): stmt =
