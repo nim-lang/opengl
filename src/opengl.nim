@@ -272,7 +272,7 @@ type
 
 proc glGetError*: TGLenum {.stdcall, importc, ogl.}
 proc getGlError*: TGlError = glGetError().TGlError
-  ## Like `glGetError` but returns an enumerator instead.
+  ## Like ``glGetError`` but returns an enumerator instead.
 
 type
   E_GL* = object of E_Base
@@ -281,7 +281,7 @@ type
                     ## an outdated list of errors or a bad driver.
 
 proc checkGlError* =
-  ## Raise `E_GL` if the last call to an OpenGL function generated an error.
+  ## Raise ``E_GL`` if the last call to an OpenGL function generated an error.
   ## You might want to call this once every frame for example if automatic
   ## error checking has been disabled.
   let error = getGlError()
@@ -300,17 +300,18 @@ proc checkGlError* =
   raise exc
 
 const
-  NoGlAutoErrorCheck* = defined(noGlAutoErrorCheck) #\
-    ## This determines whether an exception should be raised if an OpenGL call
-    ## generates an error. No additional code will be generated when
-    ## `noGlAutoErrorCheck` has been defined.
+  NoAutoGlErrorCheck* = defined(noAutoGlErrorCheck) ##\
+  ## This determines (at compile time) whether an exception should be raised
+  ## if an OpenGL call generates an error. No additional code will be generated
+  ## and ``enableAutoGlErrorCheck(bool)`` will have no effect when
+  ## ``noAutoGlErrorCheck`` is defined.
 
 var glAutoErrorCheck = true
 
-proc enableGlAutoErrorCheck*(yes: bool) =
-  ## This determines whether an exception should be raised if an OpenGL call
-  ## generates an error. This has no effect when
-  ## ``NoGlAutoErrorCheck == true``.
+proc enableAutoGlErrorCheck*(yes: bool) =
+  ## This determines (at run time) whether an exception should be raised if an
+  ## OpenGL call generates an error. This has no effect when
+  ## ``noAutoGlErrorCheck`` is defined.
   glAutoErrorCheck = yes
 
 macro wrapErrorChecking(f: stmt): stmt =
@@ -341,7 +342,7 @@ macro wrapErrorChecking(f: stmt): stmt =
         glCall
 
     template errCheck: stmt =
-      when not (NoGlAutoErrorCheck):
+      when not (NoAutoGlErrorCheck):
         if glAutoErrorCheck:
           checkGlError()
 
