@@ -306,13 +306,13 @@ const
   ## and ``enableAutoGlErrorCheck(bool)`` will have no effect when
   ## ``noAutoGlErrorCheck`` is defined.
 
-var autoGlErrorCheck = true
+var gAutoGlErrorCheck = true
 
 proc enableAutoGlErrorCheck*(yes: bool) =
   ## This determines (at run time) whether an exception should be raised if an
   ## OpenGL call generates an error. This has no effect when
   ## ``noAutoGlErrorCheck`` is defined.
-  autoGlErrorCheck = yes
+  gAutoGlErrorCheck = yes
 
 macro wrapErrorChecking(f: stmt): stmt =
   f.expectKind nnkStmtList
@@ -343,7 +343,7 @@ macro wrapErrorChecking(f: stmt): stmt =
 
     template errCheck: stmt =
       when not (NoAutoGlErrorCheck):
-        if autoGlErrorCheck:
+        if gAutoGlErrorCheck:
           checkGlError()
 
     body.add getAst(errCheck())
