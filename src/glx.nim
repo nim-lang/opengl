@@ -23,8 +23,7 @@
 #  Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #
 
-import 
-  X, XLib, XUtil, gl
+import X, XLib, XUtil, opengl
 
 when defined(windows): 
   const 

@@ -15,8 +15,7 @@
 #   For the latest updates, visit Delphi3D: http://www.delphi3d.net
 #******************************************************************************
 
-import 
-  GL
+import opengl
 
 when defined(windows): 
   const 

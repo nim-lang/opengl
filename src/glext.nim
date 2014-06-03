@@ -17,8 +17,7 @@ when defined(windows):
   {.push, callconv: stdcall.}
 else: 
   {.push, callconv: cdecl.}
-import 
-  gl
+import opengl
 
 type 
   GLcharARB* = Char

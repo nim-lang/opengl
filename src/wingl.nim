@@ -1,5 +1,4 @@
-import 
-  gl, windows
+import opengl, windows
 
 proc wglGetExtensionsStringARB*(hdc: HDC): cstring{.dynlib: dllname, 
     importc: "wglGetExtensionsStringARB".}
