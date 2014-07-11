@@ -306,7 +306,9 @@ const
   ## and ``enableAutoGlErrorCheck(bool)`` will have no effect when
   ## ``noAutoGlErrorCheck`` is defined.
 
-var gAutoGlErrorCheck = true
+var
+  gAutoGlErrorCheck = true
+  gInsideBeginEnd* = false # do not change manually.
 
 proc enableAutoGlErrorCheck*(yes: bool) =
   ## This determines (at run time) whether an exception should be raised if an
@@ -327,7 +329,8 @@ macro wrapErrorChecking(f: stmt): stmt =
           ident"importc" , newLit($child.name))
       ).add(ident"ogl")
 
-    glProc.name = ident($glProc.name & "Impl")
+    let rawGlProName = $glProc.name
+    glProc.name = ident(rawGlProName & "Impl")
     var
       body = newStmtList glProc
       returnsSomething = child.params[0].kind != nnkEmpty
@@ -341,9 +344,14 @@ macro wrapErrorChecking(f: stmt): stmt =
       else:
         glCall
 
+    if rawGlProName == "glBegin":
+      body.add newAssignment(ident"gInsideBeginEnd", ident"true")
+    if rawGlProName == "glEnd":
+      body.add newAssignment(ident"gInsideBeginEnd", ident"false")
+
     template errCheck: stmt =
       when not (NoAutoGlErrorCheck):
-        if gAutoGlErrorCheck:
+        if gAutoGlErrorCheck and not gInsideBeginEnd:
           checkGlError()
 
     body.add getAst(errCheck())
