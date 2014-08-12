@@ -47,7 +47,7 @@ else:
   # quite complex ... thanks to extension support for various platforms:
   import dynlib
   
-  let oglHandle = LoadLib(ogldll)
+  let oglHandle = loadLib(ogldll)
   if isNil(oglHandle): quit("could not load: " & ogldll)
   
   when defined(windows):
@@ -63,12 +63,12 @@ else:
     when defined(windows):
       result = symAddr(h, procname)
       if result != nil: return
-      if not isNil(wglGetProcAddress): result = wglGetProcAddress(ProcName)
+      if not isNil(wglGetProcAddress): result = wglGetProcAddress(procName)
     elif defined(linux):
-      if not isNil(glXGetProcAddress): result = glXGetProcAddress(ProcName)
+      if not isNil(glXGetProcAddress): result = glXGetProcAddress(procName)
       if result != nil: return 
       if not isNil(glXGetProcAddressARB): 
-        result = glXGetProcAddressARB(ProcName)
+        result = glXGetProcAddressARB(procName)
         if result != nil: return
       result = symAddr(h, procname)
     else:
@@ -79,7 +79,7 @@ else:
   
   proc gluGetProc(procname: cstring): pointer =
     if gluHandle == nil:
-      gluHandle = LoadLib(gludll)
+      gluHandle = loadLib(gludll)
       if gluHandle == nil: quit("could not load: " & gludll)
     result = glGetProc(gluHandle, procname)
   
@@ -209,14 +209,14 @@ type
   TGLVectori2* = array[0..1, GLint]
   TGLVectorf2* = array[0..1, GLfloat]
   TGLVectord2* = array[0..1, GLdouble]
-  TGLVectorp2* = array[0..1, Pointer]
+  TGLVectorp2* = array[0..1, pointer]
   TGLVectorb3* = array[0..2, GLbyte]
   TGLVectorub3* = array[0..2, GLubyte]
   TGLVectori3* = array[0..2, GLint]
   TGLVectorui3* = array[0..2, GLuint]
   TGLVectorf3* = array[0..2, GLfloat]
   TGLVectord3* = array[0..2, GLdouble]
-  TGLVectorp3* = array[0..2, Pointer]
+  TGLVectorp3* = array[0..2, pointer]
   TGLVectors3* = array[0..2, GLshort]
   TGLVectorus3* = array[0..2, GLushort]
   TGLVectorb4* = array[0..3, GLbyte]
@@ -225,7 +225,7 @@ type
   TGLVectorui4* = array[0..3, GLuint]
   TGLVectorf4* = array[0..3, GLfloat]
   TGLVectord4* = array[0..3, GLdouble]
-  TGLVectorp4* = array[0..3, Pointer]
+  TGLVectorp4* = array[0..3, pointer]
   TGLVectors4* = array[0..3, GLshort]
   TGLVectorus4* = array[0..3, GLshort]
   TGLArrayf4* = TGLVectorf4
