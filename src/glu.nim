@@ -55,13 +55,14 @@ type
   TGLUquadricObj* = GLUquadricObj
   TGLUtesselatorObj* = GLUtesselatorObj
   TGLUtriangulatorObj* = GLUtriangulatorObj
-  PGLfloat* = float32
-  PGLdouble* = float64
+  PGLfloat* = ptr TGLfloat
+  PGLdouble* = ptr TGLdouble
   
 proc gluErrorString*(errCode: TGLenum): cstring{.dynlib: dllname, 
     importc: "gluErrorString".}
-#proc gluErrorUnicodeStringEXT*(errCode: TGLenum): ptr int16{.dynlib: dllname, 
-#    importc: "gluErrorUnicodeStringEXT".}
+when defined(Windows):
+  proc gluErrorUnicodeStringEXT*(errCode: TGLenum): ptr int16{.dynlib: dllname, 
+      importc: "gluErrorUnicodeStringEXT".}
 proc gluGetString*(name: TGLenum): cstring{.dynlib: dllname, 
     importc: "gluGetString".}
 proc gluOrtho2D*(left, right, bottom, top: TGLdouble){.dynlib: dllname, 
