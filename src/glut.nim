@@ -17,6 +17,8 @@
 
 import opengl
 
+{.deadCodeElim: on.}
+
 when defined(windows):
   const
     dllname = "glut32.dll"

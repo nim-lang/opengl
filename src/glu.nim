@@ -10,6 +10,8 @@
 
 import opengl
 
+{.deadCodeElim: on.}
+
 when defined(windows):
   {.push, callconv: stdcall.}
 else:

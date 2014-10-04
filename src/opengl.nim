@@ -9,7 +9,7 @@
 #
 
 ## This module is a wrapper around `opengl`:idx:. If you define the symbol
-## ``useGlew`` this wrapper does not use Nimrod's ``dynlib`` mechanism, 
+## ``useGlew`` this wrapper does not use Nimrod's ``dynlib`` mechanism,
 ## but `glew`:idx: instead. However, this shouldn't be necessary anymore; even
 ## extension loading for the different operating systems is handled here.
 ##
@@ -23,18 +23,18 @@ when defined(linux):
 elif defined(windows):
   import winlean, os
 
-when defined(windows): 
-  const 
+when defined(windows):
+  const
     ogldll* = "OpenGL32.dll"
     gludll* = "GLU32.dll"
-elif defined(macosx): 
+elif defined(macosx):
   #macosx has this notion of a framework, thus the path to the openGL dylib files
   #is absolute
-  const 
+  const
     ogldll* = "/System/Library/Frameworks/OpenGL.framework/Versions/Current/Libraries/libGL.dylib"
     gludll* = "/System/Library/Frameworks/OpenGL.framework/Versions/Current/Libraries/libGLU.dylib"
-else: 
-  const 
+else:
+  const
     ogldll* = "libGL.so.1"
     gludll* = "libGLU.so.1"
 
@@ -46,10 +46,10 @@ when defined(useGlew):
 else:
   # quite complex ... thanks to extension support for various platforms:
   import dynlib
-  
+
   let oglHandle = loadLib(ogldll)
   if isNil(oglHandle): quit("could not load: " & ogldll)
-  
+
   when defined(windows):
     var wglGetProcAddress = cast[proc (s: cstring): pointer {.stdcall.}](
       symAddr(oglHandle, "wglGetProcAddress"))
@@ -66,8 +66,8 @@ else:
       if not isNil(wglGetProcAddress): result = wglGetProcAddress(procName)
     elif defined(linux):
       if not isNil(glXGetProcAddress): result = glXGetProcAddress(procName)
-      if result != nil: return 
-      if not isNil(glXGetProcAddressARB): 
+      if result != nil: return
+      if not isNil(glXGetProcAddressARB):
         result = glXGetProcAddressARB(procName)
         if result != nil: return
       result = symAddr(h, procname)
@@ -76,22 +76,22 @@ else:
     if result == nil: raiseInvalidLibrary(procName)
 
   var gluHandle: TLibHandle
-  
+
   proc gluGetProc(procname: cstring): pointer =
     if gluHandle == nil:
       gluHandle = loadLib(gludll)
       if gluHandle == nil: quit("could not load: " & gludll)
     result = glGetProc(gluHandle, procname)
-  
+
   # undocumented 'dynlib' feature: the string literal is replaced by
   # the imported proc name:
   {.pragma: ogl, dynlib: glGetProc(oglHandle, "0").}
   {.pragma: oglx, dynlib: glGetProc(oglHandle, "0").}
   {.pragma: wgl, dynlib: glGetProc(oglHandle, "0").}
   {.pragma: glu, dynlib: gluGetProc("").}
-  
+
   proc nimLoadProcs0() {.importc.}
-  
+
   template loadExtensions*() =
     ## call this after your rendering context has been setup if you use
     ## extensions.
