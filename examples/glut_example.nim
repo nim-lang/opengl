@@ -7,20 +7,23 @@ import glu
 proc display() {.cdecl.} =
   glClear(GL_COLOR_BUFFER_BIT or GL_DEPTH_BUFFER_BIT) # Clear color and depth buffers
   glMatrixMode(GL_MODELVIEW)                          # To operate on model-view matrix
-
-  # Render a color-cube consisting of 6 quads with different colors
   glLoadIdentity()                 # Reset the model-view matrix
-  glTranslatef(1.5, 0.0, -7.0)  # Move right and into the screen
+  glTranslatef(1.5, 0.0, -7.0)     # Move right and into the screen
 
-  glBegin(GL_QUADS)             # Begin drawing the color cube with 6 quads
+  # Render a cube consisting of 6 quads
+  # Each quad consists of 2 triangles
+  # Each triangle consists of 3 vertices
+
+  glBegin(GL_TRIANGLES)        # Begin drawing of triangles
 
   # Top face (y = 1.0f)
-  # Define vertices in counter-clockwise (CCW) order with normal pointing out
   glColor3f(0.0, 1.0, 0.0)     # Green
   glVertex3f( 1.0, 1.0, -1.0)
   glVertex3f(-1.0, 1.0, -1.0)
   glVertex3f(-1.0, 1.0,  1.0)
   glVertex3f( 1.0, 1.0,  1.0)
+  glVertex3f( 1.0, 1.0, -1.0)
+  glVertex3f(-1.0, 1.0,  1.0)
 
   # Bottom face (y = -1.0f)
   glColor3f(1.0, 0.5, 0.0)     # Orange
@@ -28,6 +31,8 @@ proc display() {.cdecl.} =
   glVertex3f(-1.0, -1.0,  1.0)
   glVertex3f(-1.0, -1.0, -1.0)
   glVertex3f( 1.0, -1.0, -1.0)
+  glVertex3f( 1.0, -1.0,  1.0)
+  glVertex3f(-1.0, -1.0, -1.0)
 
   # Front face  (z = 1.0f)
   glColor3f(1.0, 0.0, 0.0)     # Red
@@ -35,6 +40,8 @@ proc display() {.cdecl.} =
   glVertex3f(-1.0,  1.0, 1.0)
   glVertex3f(-1.0, -1.0, 1.0)
   glVertex3f( 1.0, -1.0, 1.0)
+  glVertex3f( 1.0,  1.0, 1.0)
+  glVertex3f(-1.0, -1.0, 1.0)
 
   # Back face (z = -1.0f)
   glColor3f(1.0, 1.0, 0.0)     # Yellow
@@ -42,6 +49,8 @@ proc display() {.cdecl.} =
   glVertex3f(-1.0, -1.0, -1.0)
   glVertex3f(-1.0,  1.0, -1.0)
   glVertex3f( 1.0,  1.0, -1.0)
+  glVertex3f( 1.0, -1.0, -1.0)
+  glVertex3f(-1.0,  1.0, -1.0)
 
   # Left face (x = -1.0f)
   glColor3f(0.0, 0.0, 1.0)     # Blue
@@ -49,6 +58,8 @@ proc display() {.cdecl.} =
   glVertex3f(-1.0,  1.0, -1.0)
   glVertex3f(-1.0, -1.0, -1.0)
   glVertex3f(-1.0, -1.0,  1.0)
+  glVertex3f(-1.0,  1.0,  1.0)
+  glVertex3f(-1.0, -1.0, -1.0)
 
   # Right face (x = 1.0f)
   glColor3f(1.0, 0.0, 1.0)    # Magenta
@@ -56,6 +67,8 @@ proc display() {.cdecl.} =
   glVertex3f(1.0,  1.0,  1.0)
   glVertex3f(1.0, -1.0,  1.0)
   glVertex3f(1.0, -1.0, -1.0)
+  glVertex3f(1.0,  1.0, -1.0)
+  glVertex3f(1.0, -1.0,  1.0)
 
   glEnd()  # End of drawing
 
