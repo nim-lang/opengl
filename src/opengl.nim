@@ -364,7 +364,7 @@ proc enableAutoGLerrorCheck*(yes: bool) =
   ## ``noAutoGLerrorCheck`` is defined.
   gAutoGLerrorCheck = yes
 
-macro wrapErrorChecking(f: stmt): stmt =
+macro wrapErrorChecking(f: stmt): stmt {.immediate.} =
   f.expectKind nnkStmtList
   result = newStmtList()
 
