@@ -20,7 +20,7 @@
 
 import macros, sequtils
 
-when defined(linux):
+when defined(linux) and not defined(android):
   import X, XLib, XUtil
 elif defined(windows):
   import winlean, os
@@ -45,6 +45,13 @@ when defined(useGlew):
   {.pragma: oglx, header: "<GL/glxew.h>".}
   {.pragma: wgl, header: "<GL/wglew.h>".}
   {.pragma: glu, dynlib: gludll.}
+elif defined(ios):
+  {.pragma: ogl.}
+  {.pragma: oglx.}
+  {.passC: "-framework OpenGLES", passL: "-framework OpenGLES".}
+elif defined(android):
+  {.pragma: ogl.}
+  {.pragma: oglx.}
 else:
   # quite complex ... thanks to extension support for various platforms:
   import dynlib
