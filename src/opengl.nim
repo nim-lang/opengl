@@ -1295,7 +1295,7 @@ wrapErrorChecking:
   proc glUniformHandleui64vARB(location: GLint, count: GLsizei, value: ptr GLuint64) {.importc.}
   proc glAreTexturesResidentEXT(n: GLsizei, textures: ptr GLuint, residences: ptr GLboolean): GLboolean {.importc.}
   proc glDrawElementsInstancedBaseInstance(mode: GLenum, count: GLsizei, `type`: GLenum, indices: ptr pointer, instancecount: GLsizei, baseinstance: GLuint) {.importc.}
-  proc glGetString(name: GLenum): GLubyte {.importc.}
+  proc glGetString(name: GLenum): ptr GLubyte {.importc.}
   proc glDrawTransformFeedbackStream(mode: GLenum, id: GLuint, stream: GLuint) {.importc.}
   proc glSecondaryColor3uiv(v: ptr GLuint) {.importc.}
   proc glNamedFramebufferParameteriEXT(framebuffer: GLuint, pname: GLenum, param: GLint) {.importc.}
@@ -1609,7 +1609,7 @@ wrapErrorChecking:
   proc glGetInvariantFloatvEXT(id: GLuint, value: GLenum, data: ptr GLfloat) {.importc.}
   proc glMultiTexCoord4d(target: GLenum, s: GLdouble, t: GLdouble, r: GLdouble, q: GLdouble) {.importc.}
   proc glGetPixelTransformParameterfvEXT(target: GLenum, pname: GLenum, params: ptr GLfloat) {.importc.}
-  proc glGetStringi(name: GLenum, index: GLuint): GLubyte {.importc.}
+  proc glGetStringi(name: GLenum, index: GLuint): ptr GLubyte {.importc.}
   proc glMakeBufferNonResidentNV(target: GLenum) {.importc.}
   proc glVertex4bOES(x: GLbyte, y: GLbyte, z: GLbyte) {.importc.}
   proc glGetObjectLabel(identifier: GLenum, name: GLuint, bufSize: GLsizei, length: ptr GLsizei, label: cstring) {.importc.}
