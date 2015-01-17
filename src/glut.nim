@@ -438,4 +438,5 @@ proc glutEnterGameMode*(): int{.dynlib: dllname, importc: "glutEnterGameMode".}
 proc glutLeaveGameMode*(){.dynlib: dllname, importc: "glutLeaveGameMode".}
 proc glutGameModeGet*(mode: TGLenum): int{.dynlib: dllname,
     importc: "glutGameModeGet".}
+proc glutCloseFunc(cb: proc() {.cdecl.}) {.dynlib: dllname, importc.}
 # implementation
