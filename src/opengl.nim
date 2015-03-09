@@ -20,9 +20,9 @@
 
 import macros, sequtils
 
-when defined(linux) and not defined(android):
+when declared(linux) and not declared(android):
   import X, XLib, XUtil
-elif defined(windows):
+elif declared(windows):
   import winlean, os
 
 when defined(windows):
@@ -40,16 +40,16 @@ else:
     ogldll* = "libGL.so.1"
     gludll* = "libGLU.so.1"
 
-when defined(useGlew):
+when declared(useGlew):
   {.pragma: ogl, header: "<GL/glew.h>".}
   {.pragma: oglx, header: "<GL/glxew.h>".}
   {.pragma: wgl, header: "<GL/wglew.h>".}
   {.pragma: glu, dynlib: gludll.}
-elif defined(ios):
+elif declared(ios):
   {.pragma: ogl.}
   {.pragma: oglx.}
   {.passC: "-framework OpenGLES", passL: "-framework OpenGLES".}
-elif defined(android):
+elif declared(android):
   {.pragma: ogl.}
   {.pragma: oglx.}
 else:
@@ -59,21 +59,21 @@ else:
   let oglHandle = loadLib(ogldll)
   if isNil(oglHandle): quit("could not load: " & ogldll)
 
-  when defined(windows):
+  when declared(windows):
     var wglGetProcAddress = cast[proc (s: cstring): pointer {.stdcall.}](
       symAddr(oglHandle, "wglGetProcAddress"))
-  elif defined(linux):
+  elif declared(linux):
     var glxGetProcAddress = cast[proc (s: cstring): pointer {.cdecl.}](
       symAddr(oglHandle, "glxGetProcAddress"))
     var glxGetProcAddressArb = cast[proc (s: cstring): pointer {.cdecl.}](
       symAddr(oglHandle, "glxGetProcAddressARB"))
 
-  proc glGetProc(h: TLibHandle; procName: cstring): pointer =
-    when defined(windows):
+  proc glGetProc(h: LibHandle; procName: cstring): pointer =
+    when declared(windows):
       result = symAddr(h, procname)
       if result != nil: return
       if not isNil(wglGetProcAddress): result = wglGetProcAddress(procName)
-    elif defined(linux):
+    elif declared(linux):
       if not isNil(glxGetProcAddress): result = glxGetProcAddress(procName)
       if result != nil: return
       if not isNil(glxGetProcAddressArb):
@@ -84,7 +84,7 @@ else:
       result = symAddr(h, procName)
     if result == nil: raiseInvalidLibrary(procName)
 
-  var gluHandle: TLibHandle
+  var gluHandle: LibHandle
 
   proc gluGetProc(procname: cstring): pointer =
     if gluHandle == nil:
@@ -234,7 +234,7 @@ const AllErrorCodes = {
     glErrTableTooLarge,
 }
 
-when defined(macosx):
+when declared(macosx):
   type
     GLhandleArb = pointer
 else:
@@ -330,7 +330,7 @@ proc getGLerrorCode*: GLerrorCode = glGetError().GLerrorCode
   ## Like ``glGetError`` but returns an enumerator instead.
 
 type
-  GLerror* = object of E_Base
+  GLerror* = object of Exception
     ## An exception for OpenGL errors.
     code*: GLerrorCode ## The error code. This might be invalid for two reasons:
                     ## an outdated list of errors or a bad driver.
@@ -355,7 +355,7 @@ proc checkGLerror* =
   raise exc
 
 const
-  NoAutoGLerrorCheck* = defined(noAutoGLerrorCheck) ##\
+  NoAutoGLerrorCheck* = declared(noAutoGLerrorCheck) ##\
   ## This determines (at compile time) whether an exception should be raised
   ## if an OpenGL call generates an error. No additional code will be generated
   ## and ``enableAutoGLerrorCheck(bool)`` will have no effect when
@@ -416,7 +416,7 @@ macro wrapErrorChecking(f: stmt): stmt {.immediate.} =
     procc.name = postfix(procc.name, "*")
     result.add procc
 
-{.push stdcall, hint[XDeclaredButNotUsed]: off.}
+{.push stdcall, hint[XDeclaredButNotUsed]: off, warning[SmallLshouldNotBeUsed]: off.}
 wrapErrorChecking:
   proc glMultiTexCoord2d(target: GLenum, s: GLdouble, t: GLdouble) {.importc.}
   proc glDrawElementsIndirect(mode: GLenum, `type`: GLenum, indirect: pointer) {.importc.}
@@ -3236,7 +3236,7 @@ wrapErrorChecking:
   proc glVertexAttribPointerNV(index: GLuint, fsize: GLint, `type`: GLenum, stride: GLsizei, `pointer`: pointer) {.importc.}
   proc glColorTable(target: GLenum, internalformat: GLenum, width: GLsizei, format: GLenum, `type`: GLenum, table: pointer) {.importc.}
   proc glProgramUniformMatrix2x3dv(program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: ptr GLdouble) {.importc.}
-{.pop.} # stdcall, hint[XDeclaredButNotUsed]: off.
+{.pop.} # stdcall, hint[XDeclaredButNotUsed]: off, warning[SmallLshouldNotBeUsed]: off.
 
 const
   cGL_UNSIGNED_BYTE* = 0x1401
