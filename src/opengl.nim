@@ -20,9 +20,11 @@
 
 import macros, sequtils
 
-when declared(linux) and not declared(android):
+{.push warning[User]: off.}
+
+when defined(linux) and not defined(android):
   import X, XLib, XUtil
-elif declared(windows):
+elif defined(windows):
   import winlean, os
 
 when defined(windows):
@@ -40,16 +42,16 @@ else:
     ogldll* = "libGL.so.1"
     gludll* = "libGLU.so.1"
 
-when declared(useGlew):
+when defined(useGlew):
   {.pragma: ogl, header: "<GL/glew.h>".}
   {.pragma: oglx, header: "<GL/glxew.h>".}
   {.pragma: wgl, header: "<GL/wglew.h>".}
   {.pragma: glu, dynlib: gludll.}
-elif declared(ios):
+elif defined(ios):
   {.pragma: ogl.}
   {.pragma: oglx.}
   {.passC: "-framework OpenGLES", passL: "-framework OpenGLES".}
-elif declared(android):
+elif defined(android):
   {.pragma: ogl.}
   {.pragma: oglx.}
 else:
@@ -59,21 +61,21 @@ else:
   let oglHandle = loadLib(ogldll)
   if isNil(oglHandle): quit("could not load: " & ogldll)
 
-  when declared(windows):
+  when defined(windows):
     var wglGetProcAddress = cast[proc (s: cstring): pointer {.stdcall.}](
       symAddr(oglHandle, "wglGetProcAddress"))
-  elif declared(linux):
+  elif defined(linux):
     var glxGetProcAddress = cast[proc (s: cstring): pointer {.cdecl.}](
       symAddr(oglHandle, "glxGetProcAddress"))
     var glxGetProcAddressArb = cast[proc (s: cstring): pointer {.cdecl.}](
       symAddr(oglHandle, "glxGetProcAddressARB"))
 
   proc glGetProc(h: LibHandle; procName: cstring): pointer =
-    when declared(windows):
+    when defined(windows):
       result = symAddr(h, procname)
       if result != nil: return
       if not isNil(wglGetProcAddress): result = wglGetProcAddress(procName)
-    elif declared(linux):
+    elif defined(linux):
       if not isNil(glxGetProcAddress): result = glxGetProcAddress(procName)
       if result != nil: return
       if not isNil(glxGetProcAddressArb):
@@ -106,6 +108,8 @@ else:
     ## extensions.
     bind nimLoadProcs0
     nimLoadProcs0()
+
+{.pop.} # warning[User]: off
 
 type
   GLenum* = uint32
@@ -234,7 +238,7 @@ const AllErrorCodes = {
     glErrTableTooLarge,
 }
 
-when declared(macosx):
+when defined(macosx):
   type
     GLhandleArb = pointer
 else:
@@ -354,12 +358,16 @@ proc checkGLerror* =
   exc.msg = "OpenGL error: unknown (" & $error & ")"
   raise exc
 
+{.push warning[User]: off.}
+
 const
-  NoAutoGLerrorCheck* = declared(noAutoGLerrorCheck) ##\
+  NoAutoGLerrorCheck* = defined(noAutoGLerrorCheck) ##\
   ## This determines (at compile time) whether an exception should be raised
   ## if an OpenGL call generates an error. No additional code will be generated
   ## and ``enableAutoGLerrorCheck(bool)`` will have no effect when
   ## ``noAutoGLerrorCheck`` is defined.
+
+{.pop.} # warning[User]: off
 
 var
   gAutoGLerrorCheck = true
