@@ -20,6 +20,8 @@
 
 import macros, sequtils
 
+{.push warning[User]: off.}
+
 when defined(linux) and not defined(android):
   import X, XLib, XUtil
 elif defined(windows):
@@ -68,7 +70,7 @@ else:
     var glxGetProcAddressArb = cast[proc (s: cstring): pointer {.cdecl.}](
       symAddr(oglHandle, "glxGetProcAddressARB"))
 
-  proc glGetProc(h: TLibHandle; procName: cstring): pointer =
+  proc glGetProc(h: LibHandle; procName: cstring): pointer =
     when defined(windows):
       result = symAddr(h, procname)
       if result != nil: return
@@ -84,7 +86,7 @@ else:
       result = symAddr(h, procName)
     if result == nil: raiseInvalidLibrary(procName)
 
-  var gluHandle: TLibHandle
+  var gluHandle: LibHandle
 
   proc gluGetProc(procname: cstring): pointer =
     if gluHandle == nil:
@@ -106,6 +108,8 @@ else:
     ## extensions.
     bind nimLoadProcs0
     nimLoadProcs0()
+
+{.pop.} # warning[User]: off
 
 type
   GLenum* = uint32
@@ -330,7 +334,7 @@ proc getGLerrorCode*: GLerrorCode = glGetError().GLerrorCode
   ## Like ``glGetError`` but returns an enumerator instead.
 
 type
-  GLerror* = object of E_Base
+  GLerror* = object of Exception
     ## An exception for OpenGL errors.
     code*: GLerrorCode ## The error code. This might be invalid for two reasons:
                     ## an outdated list of errors or a bad driver.
@@ -354,12 +358,16 @@ proc checkGLerror* =
   exc.msg = "OpenGL error: unknown (" & $error & ")"
   raise exc
 
+{.push warning[User]: off.}
+
 const
   NoAutoGLerrorCheck* = defined(noAutoGLerrorCheck) ##\
   ## This determines (at compile time) whether an exception should be raised
   ## if an OpenGL call generates an error. No additional code will be generated
   ## and ``enableAutoGLerrorCheck(bool)`` will have no effect when
   ## ``noAutoGLerrorCheck`` is defined.
+
+{.pop.} # warning[User]: off
 
 var
   gAutoGLerrorCheck = true
@@ -416,7 +424,7 @@ macro wrapErrorChecking(f: stmt): stmt {.immediate.} =
     procc.name = postfix(procc.name, "*")
     result.add procc
 
-{.push stdcall, hint[XDeclaredButNotUsed]: off.}
+{.push stdcall, hint[XDeclaredButNotUsed]: off, warning[SmallLshouldNotBeUsed]: off.}
 wrapErrorChecking:
   proc glMultiTexCoord2d(target: GLenum, s: GLdouble, t: GLdouble) {.importc.}
   proc glDrawElementsIndirect(mode: GLenum, `type`: GLenum, indirect: pointer) {.importc.}
@@ -3236,7 +3244,7 @@ wrapErrorChecking:
   proc glVertexAttribPointerNV(index: GLuint, fsize: GLint, `type`: GLenum, stride: GLsizei, `pointer`: pointer) {.importc.}
   proc glColorTable(target: GLenum, internalformat: GLenum, width: GLsizei, format: GLenum, `type`: GLenum, table: pointer) {.importc.}
   proc glProgramUniformMatrix2x3dv(program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: ptr GLdouble) {.importc.}
-{.pop.} # stdcall, hint[XDeclaredButNotUsed]: off.
+{.pop.} # stdcall, hint[XDeclaredButNotUsed]: off, warning[SmallLshouldNotBeUsed]: off.
 
 const
   cGL_UNSIGNED_BYTE* = 0x1401
