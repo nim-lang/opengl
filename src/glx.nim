@@ -85,7 +85,7 @@ type                          # From XLib:
   XPixmap* = TXID
   XFont* = TXID
   XColormap* = TXID
-  GLXContext* = Pointer
+  GLXContext* = pointer
   GLXPixmap* = TXID
   GLXDrawable* = TXID
   GLXContextID* = TXID
