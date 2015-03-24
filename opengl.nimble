@@ -2,10 +2,10 @@
 name: "opengl"
 version: "1.0"
 author: "Andreas Rumpf"
-description: "High-level and low-level wrapper for OpenGL"
+description: "an OpenGL wrapper"
 license: "MIT"
 
 srcDir: "src"
 
 [Deps]
-requires: "nimrod > 0.9.2, x11"
+requires: "nim >= 0.10.3, x11"
