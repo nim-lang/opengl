@@ -23,7 +23,7 @@ import opengl
 {.deadCodeElim: on.}
 
 type
-  GLcharARB* = Char
+  GLcharARB* = char
   TGLcharARB* = GLcharARB
   PGLcharARB* = ptr GLcharARB
   GLhandleARB* = int
@@ -35,7 +35,7 @@ type
   GLsizeiptr* = int
   TGLsizeiptr* = GLsizeiptr
   PGLsizeiptr* = ptr GLsizeiptr
-  GLchar* = Char
+  GLchar* = char
   TGLchar* = GLchar
   PGLchar* = cstring          #***** GL_version_1_2 *****//
 
@@ -81,8 +81,8 @@ const
   GL_TEXTURE_WRAP_R* = 0x00008072
   GL_MAX_3D_TEXTURE_SIZE* = 0x00008073
 
-proc glBlendColor*(red: TGLclampf, green: TGLclampf, blue: TGLclampf,
-                   alpha: TGLclampf){.dynlib: dllname, importc: "glBlendColor".}
+proc glBlendColor*(red: GLclampf, green: GLclampf, blue: GLclampf,
+                   alpha: GLclampf){.dynlib: dllname, importc: "glBlendColor".}
 proc glBlendEquation*(mode: TGLenum){.dynlib: dllname,
                                       importc: "glBlendEquation".}
 proc glDrawRangeElements*(mode: TGLenum, start: TGLuint, theend: TGLuint,
@@ -261,7 +261,7 @@ proc glMultiTexCoord4sARB*(target: TGLenum, s: TGLshort, t: TGLshort,
     importc: "glMultiTexCoord4sARB".}
 proc glMultiTexCoord4svARB*(target: TGLenum, v: PGLshort){.dynlib: dllname,
     importc: "glMultiTexCoord4svARB".}
-proc glSampleCoverageARB*(value: TGLclampf, invert: TGLboolean){.
+proc glSampleCoverageARB*(value: GLclampf, invert: TGLboolean){.
     dynlib: dllname, importc: "glSampleCoverageARB".}
   #***** GL_ARB_texture_env_add *****//
 proc glWeightbvARB*(size: TGLint, weights: PGLbyte){.dynlib: dllname,
@@ -830,7 +830,7 @@ proc glMultTransposeMatrixf*(m: PGLfloat){.dynlib: dllname,
     importc: "glMultTransposeMatrixf".}
 proc glMultTransposeMatrixd*(m: PGLdouble){.dynlib: dllname,
     importc: "glMultTransposeMatrixd".}
-proc glSampleCoverage*(value: TGLclampf, invert: TGLboolean){.dynlib: dllname,
+proc glSampleCoverage*(value: GLclampf, invert: TGLboolean){.dynlib: dllname,
     importc: "glSampleCoverage".}
 proc glCompressedTexImage3D*(target: TGLenum, level: TGLint,
                              internalformat: TGLenum, width: TGLsizei,
@@ -1302,8 +1302,8 @@ const
   GL_ONE_MINUS_CONSTANT_ALPHA_EXT* = 0x00008004
   constGL_BLEND_COLOR_EXT* = 0x00008005
 
-proc glBlendColorEXT*(red: TGLclampf, green: TGLclampf, blue: TGLclampf,
-                      alpha: TGLclampf){.dynlib: dllname,
+proc glBlendColorEXT*(red: GLclampf, green: GLclampf, blue: GLclampf,
+                      alpha: GLclampf){.dynlib: dllname,
     importc: "glBlendColorEXT".}
   #***** GL_EXT_blend_func_separate *****//
 const
@@ -3091,7 +3091,7 @@ const
   GL_SAMPLE_MASK_INVERT_SGIS* = 0x000080AB
   constGL_SAMPLE_PATTERN_SGIS* = 0x000080AC
 
-proc glSampleMaskSGIS*(value: TGLclampf, invert: TGLboolean){.dynlib: dllname,
+proc glSampleMaskSGIS*(value: GLclampf, invert: TGLboolean){.dynlib: dllname,
     importc: "glSampleMaskSGIS".}
 proc glSamplePatternSGIS*(pattern: TGLenum){.dynlib: dllname,
     importc: "glSamplePatternSGIS".}

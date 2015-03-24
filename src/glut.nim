@@ -98,26 +98,26 @@ const
 
 when defined(Windows):
   const                       # Stroke font constants (use these in GLUT program).
-    GLUT_STROKE_ROMAN* = cast[Pointer](0)
-    GLUT_STROKE_MONO_ROMAN* = cast[Pointer](1) # Bitmap font constants (use these in GLUT program).
-    GLUT_BITMAP_9_BY_15* = cast[Pointer](2)
-    GLUT_BITMAP_8_BY_13* = cast[Pointer](3)
-    GLUT_BITMAP_TIMES_ROMAN_10* = cast[Pointer](4)
-    GLUT_BITMAP_TIMES_ROMAN_24* = cast[Pointer](5)
-    GLUT_BITMAP_HELVETICA_10* = cast[Pointer](6)
-    GLUT_BITMAP_HELVETICA_12* = cast[Pointer](7)
-    GLUT_BITMAP_HELVETICA_18* = cast[Pointer](8)
+    GLUT_STROKE_ROMAN* = cast[pointer](0)
+    GLUT_STROKE_MONO_ROMAN* = cast[pointer](1) # Bitmap font constants (use these in GLUT program).
+    GLUT_BITMAP_9_BY_15* = cast[pointer](2)
+    GLUT_BITMAP_8_BY_13* = cast[pointer](3)
+    GLUT_BITMAP_TIMES_ROMAN_10* = cast[pointer](4)
+    GLUT_BITMAP_TIMES_ROMAN_24* = cast[pointer](5)
+    GLUT_BITMAP_HELVETICA_10* = cast[pointer](6)
+    GLUT_BITMAP_HELVETICA_12* = cast[pointer](7)
+    GLUT_BITMAP_HELVETICA_18* = cast[pointer](8)
 else:
   var                         # Stroke font constants (use these in GLUT program).
-    GLUT_STROKE_ROMAN*: Pointer
-    GLUT_STROKE_MONO_ROMAN*: Pointer # Bitmap font constants (use these in GLUT program).
-    GLUT_BITMAP_9_BY_15*: Pointer
-    GLUT_BITMAP_8_BY_13*: Pointer
-    GLUT_BITMAP_TIMES_ROMAN_10*: Pointer
-    GLUT_BITMAP_TIMES_ROMAN_24*: Pointer
-    GLUT_BITMAP_HELVETICA_10*: Pointer
-    GLUT_BITMAP_HELVETICA_12*: Pointer
-    GLUT_BITMAP_HELVETICA_18*: Pointer
+    GLUT_STROKE_ROMAN*: pointer
+    GLUT_STROKE_MONO_ROMAN*: pointer # Bitmap font constants (use these in GLUT program).
+    GLUT_BITMAP_9_BY_15*: pointer
+    GLUT_BITMAP_8_BY_13*: pointer
+    GLUT_BITMAP_TIMES_ROMAN_10*: pointer
+    GLUT_BITMAP_TIMES_ROMAN_24*: pointer
+    GLUT_BITMAP_HELVETICA_10*: pointer
+    GLUT_BITMAP_HELVETICA_12*: pointer
+    GLUT_BITMAP_HELVETICA_18*: pointer
 const                         # glutGet parameters.
   GLUT_WINDOW_X* = 100
   GLUT_WINDOW_Y* = 101
@@ -270,7 +270,7 @@ proc glutWarpPointer*(x, y: int)
   # GLUT overlay sub-API.
 proc glutEstablishOverlay*()
 proc glutRemoveOverlay*()
-proc glutUseLayer*(layer: TGLenum)
+proc glutUseLayer*(layer: GLenum)
 proc glutPostOverlayRedisplay*()
 proc glutPostWindowOverlayRedisplay*(win: int)
 proc glutShowOverlay*()
@@ -313,8 +313,8 @@ proc glutKeyboardUpFunc*(f: TGlut1Char2IntCallback)
 proc glutSpecialUpFunc*(f: TGlut3IntCallback)
 proc glutJoystickFunc*(f: TGlut1UInt3IntCallback, pollInterval: int)
   # GLUT color index sub-API.
-proc glutSetColor*(cell: int, red, green, blue: TGLfloat)
-proc glutGetColor*(ndx, component: int): TGLfloat
+proc glutSetColor*(cell: int, red, green, blue: GLfloat)
+proc glutGetColor*(ndx, component: int): GLfloat
 proc glutCopyColormap*(win: int)
   # GLUT state retrieval sub-API.
   # GLUT extension support sub-API
@@ -327,18 +327,18 @@ proc glutStrokeWidth*(font: pointer, character: int): int
 proc glutBitmapLength*(font: pointer, str: cstring): int
 proc glutStrokeLength*(font: pointer, str: cstring): int
   # GLUT pre-built models sub-API
-proc glutWireSphere*(radius: TGLdouble, slices, stacks: TGLint)
-proc glutSolidSphere*(radius: TGLdouble, slices, stacks: TGLint)
-proc glutWireCone*(base, height: TGLdouble, slices, stacks: TGLint)
-proc glutSolidCone*(base, height: TGLdouble, slices, stacks: TGLint)
-proc glutWireCube*(size: TGLdouble)
-proc glutSolidCube*(size: TGLdouble)
-proc glutWireTorus*(innerRadius, outerRadius: TGLdouble, sides, rings: TGLint)
-proc glutSolidTorus*(innerRadius, outerRadius: TGLdouble, sides, rings: TGLint)
+proc glutWireSphere*(radius: GLdouble, slices, stacks: GLint)
+proc glutSolidSphere*(radius: GLdouble, slices, stacks: GLint)
+proc glutWireCone*(base, height: GLdouble, slices, stacks: GLint)
+proc glutSolidCone*(base, height: GLdouble, slices, stacks: GLint)
+proc glutWireCube*(size: GLdouble)
+proc glutSolidCube*(size: GLdouble)
+proc glutWireTorus*(innerRadius, outerRadius: GLdouble, sides, rings: GLint)
+proc glutSolidTorus*(innerRadius, outerRadius: GLdouble, sides, rings: GLint)
 proc glutWireDodecahedron*()
 proc glutSolidDodecahedron*()
-proc glutWireTeapot*(size: TGLdouble)
-proc glutSolidTeapot*(size: TGLdouble)
+proc glutWireTeapot*(size: GLdouble)
+proc glutSolidTeapot*(size: GLdouble)
 proc glutWireOctahedron*()
 proc glutSolidOctahedron*()
 proc glutWireTetrahedron*()
@@ -346,7 +346,7 @@ proc glutSolidTetrahedron*()
 proc glutWireIcosahedron*()
 proc glutSolidIcosahedron*()
   # GLUT video resize sub-API.
-proc glutVideoResizeGet*(param: TGLenum): int
+proc glutVideoResizeGet*(param: GLenum): int
 proc glutSetupVideoResizing*()
 proc glutStopVideoResizing*()
 proc glutVideoResize*(x, y, width, height: int)
@@ -361,6 +361,6 @@ proc glutForceJoystickFunc*()
   #example glutGameModeString('1280x1024:32@75');
 proc glutGameModeString*(AString: cstring)
 proc glutLeaveGameMode*()
-proc glutGameModeGet*(mode: TGLenum): int
+proc glutGameModeGet*(mode: GLenum): int
 # implementation
 {.pop.} # dynlib: dllname, importc
