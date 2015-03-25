@@ -28,35 +28,26 @@ else:
     dllname = "libGLU.so.1"
 
 type
-  TViewPortArray* = array[0..3, GLint]
+  ViewPortArray* = array[0..3, GLint]
   T16dArray* = array[0..15, GLdouble]
-  TCallBack* = proc ()
+  CallBack* = proc () {.cdecl.}
   T3dArray* = array[0..2, GLdouble]
   T4pArray* = array[0..3, pointer]
   T4fArray* = array[0..3, GLfloat]
 
+{.deprecated: [
+  TViewPortArray: ViewPortArray,
+  TCallBack: CallBack,
+].}
+
 type
-  GLUnurbs*{.final.} = object
-  PGLUnurbs* = ptr GLUnurbs
-  GLUquadric*{.final.} = object
-  PGLUquadric* = ptr GLUquadric
-  GLUtesselator*{.final.} = object
-  PGLUtesselator* = ptr GLUtesselator # backwards compatibility:
+  GLUnurbs*{.final.} = ptr object
+  GLUquadric*{.final.} = ptr object
+  GLUtesselator*{.final.} = ptr object
   GLUnurbsObj* = GLUnurbs
-  PGLUnurbsObj* = PGLUnurbs
   GLUquadricObj* = GLUquadric
-  PGLUquadricObj* = PGLUquadric
   GLUtesselatorObj* = GLUtesselator
-  PGLUtesselatorObj* = PGLUtesselator
   GLUtriangulatorObj* = GLUtesselator
-  PGLUtriangulatorObj* = PGLUtesselator
-  TGLUnurbs* = GLUnurbs
-  TGLUquadric* = GLUquadric
-  TGLUtesselator* = GLUtesselator
-  TGLUnurbsObj* = GLUnurbsObj
-  TGLUquadricObj* = GLUquadricObj
-  TGLUtesselatorObj* = GLUtesselatorObj
-  TGLUtriangulatorObj* = GLUtriangulatorObj
 
 proc gluErrorString*(errCode: GLenum): cstring{.dynlib: dllname,
     importc: "gluErrorString".}
@@ -69,17 +60,17 @@ proc gluOrtho2D*(left, right, bottom, top: GLdouble){.dynlib: dllname,
     importc: "gluOrtho2D".}
 proc gluPerspective*(fovy, aspect, zNear, zFar: GLdouble){.dynlib: dllname,
     importc: "gluPerspective".}
-proc gluPickMatrix*(x, y, width, height: GLdouble, viewport: var TViewPortArray){.
+proc gluPickMatrix*(x, y, width, height: GLdouble, viewport: var ViewPortArray){.
     dynlib: dllname, importc: "gluPickMatrix".}
 proc gluLookAt*(eyex, eyey, eyez, centerx, centery, centerz, upx, upy, upz: GLdouble){.
     dynlib: dllname, importc: "gluLookAt".}
 proc gluProject*(objx, objy, objz: GLdouble,
                  modelMatrix, projMatrix: var T16dArray,
-                 viewport: var TViewPortArray, winx, winy, winz: ptr GLdouble): int{.
+                 viewport: var ViewPortArray, winx, winy, winz: ptr GLdouble): int{.
     dynlib: dllname, importc: "gluProject".}
 proc gluUnProject*(winx, winy, winz: GLdouble,
                    modelMatrix, projMatrix: var T16dArray,
-                   viewport: var TViewPortArray, objx, objy, objz: ptr GLdouble): int{.
+                   viewport: var ViewPortArray, objx, objy, objz: ptr GLdouble): int{.
     dynlib: dllname, importc: "gluUnProject".}
 proc gluScaleImage*(format: GLenum, widthin, heightin: GLint, typein: GLenum,
                     datain: pointer, widthout, heightout: GLint,
@@ -91,81 +82,81 @@ proc gluBuild1DMipmaps*(target: GLenum, components, width: GLint,
 proc gluBuild2DMipmaps*(target: GLenum, components, width, height: GLint,
                         format, atype: GLenum, data: pointer): int{.
     dynlib: dllname, importc: "gluBuild2DMipmaps".}
-proc gluNewQuadric*(): PGLUquadric{.dynlib: dllname, importc: "gluNewQuadric".}
-proc gluDeleteQuadric*(state: PGLUquadric){.dynlib: dllname,
+proc gluNewQuadric*(): GLUquadric{.dynlib: dllname, importc: "gluNewQuadric".}
+proc gluDeleteQuadric*(state: GLUquadric){.dynlib: dllname,
     importc: "gluDeleteQuadric".}
-proc gluQuadricNormals*(quadObject: PGLUquadric, normals: GLenum){.
+proc gluQuadricNormals*(quadObject: GLUquadric, normals: GLenum){.
     dynlib: dllname, importc: "gluQuadricNormals".}
-proc gluQuadricTexture*(quadObject: PGLUquadric, textureCoords: GLboolean){.
+proc gluQuadricTexture*(quadObject: GLUquadric, textureCoords: GLboolean){.
     dynlib: dllname, importc: "gluQuadricTexture".}
-proc gluQuadricOrientation*(quadObject: PGLUquadric, orientation: GLenum){.
+proc gluQuadricOrientation*(quadObject: GLUquadric, orientation: GLenum){.
     dynlib: dllname, importc: "gluQuadricOrientation".}
-proc gluQuadricDrawStyle*(quadObject: PGLUquadric, drawStyle: GLenum){.
+proc gluQuadricDrawStyle*(quadObject: GLUquadric, drawStyle: GLenum){.
     dynlib: dllname, importc: "gluQuadricDrawStyle".}
-proc gluCylinder*(qobj: PGLUquadric, baseRadius, topRadius, height: GLdouble,
+proc gluCylinder*(qobj: GLUquadric, baseRadius, topRadius, height: GLdouble,
                   slices, stacks: GLint){.dynlib: dllname,
     importc: "gluCylinder".}
-proc gluDisk*(qobj: PGLUquadric, innerRadius, outerRadius: GLdouble,
+proc gluDisk*(qobj: GLUquadric, innerRadius, outerRadius: GLdouble,
               slices, loops: GLint){.dynlib: dllname, importc: "gluDisk".}
-proc gluPartialDisk*(qobj: PGLUquadric, innerRadius, outerRadius: GLdouble,
+proc gluPartialDisk*(qobj: GLUquadric, innerRadius, outerRadius: GLdouble,
                      slices, loops: GLint, startAngle, sweepAngle: GLdouble){.
     dynlib: dllname, importc: "gluPartialDisk".}
-proc gluSphere*(qobj: PGLuquadric, radius: GLdouble, slices, stacks: GLint){.
+proc gluSphere*(qobj: GLuquadric, radius: GLdouble, slices, stacks: GLint){.
     dynlib: dllname, importc: "gluSphere".}
-proc gluQuadricCallback*(qobj: PGLUquadric, which: GLenum, fn: TCallBack){.
+proc gluQuadricCallback*(qobj: GLUquadric, which: GLenum, fn: CallBack){.
     dynlib: dllname, importc: "gluQuadricCallback".}
-proc gluNewTess*(): PGLUtesselator{.dynlib: dllname, importc: "gluNewTess".}
-proc gluDeleteTess*(tess: PGLUtesselator){.dynlib: dllname,
+proc gluNewTess*(): GLUtesselator{.dynlib: dllname, importc: "gluNewTess".}
+proc gluDeleteTess*(tess: GLUtesselator){.dynlib: dllname,
     importc: "gluDeleteTess".}
-proc gluTessBeginPolygon*(tess: PGLUtesselator, polygon_data: pointer){.
+proc gluTessBeginPolygon*(tess: GLUtesselator, polygon_data: pointer){.
     dynlib: dllname, importc: "gluTessBeginPolygon".}
-proc gluTessBeginContour*(tess: PGLUtesselator){.dynlib: dllname,
+proc gluTessBeginContour*(tess: GLUtesselator){.dynlib: dllname,
     importc: "gluTessBeginContour".}
-proc gluTessVertex*(tess: PGLUtesselator, coords: var T3dArray, data: pointer){.
+proc gluTessVertex*(tess: GLUtesselator, coords: var T3dArray, data: pointer){.
     dynlib: dllname, importc: "gluTessVertex".}
-proc gluTessEndContour*(tess: PGLUtesselator){.dynlib: dllname,
+proc gluTessEndContour*(tess: GLUtesselator){.dynlib: dllname,
     importc: "gluTessEndContour".}
-proc gluTessEndPolygon*(tess: PGLUtesselator){.dynlib: dllname,
+proc gluTessEndPolygon*(tess: GLUtesselator){.dynlib: dllname,
     importc: "gluTessEndPolygon".}
-proc gluTessProperty*(tess: PGLUtesselator, which: GLenum, value: GLdouble){.
+proc gluTessProperty*(tess: GLUtesselator, which: GLenum, value: GLdouble){.
     dynlib: dllname, importc: "gluTessProperty".}
-proc gluTessNormal*(tess: PGLUtesselator, x, y, z: GLdouble){.dynlib: dllname,
+proc gluTessNormal*(tess: GLUtesselator, x, y, z: GLdouble){.dynlib: dllname,
     importc: "gluTessNormal".}
-proc gluTessCallback*(tess: PGLUtesselator, which: GLenum, fn: TCallBack){.
+proc gluTessCallback*(tess: GLUtesselator, which: GLenum, fn: CallBack){.
     dynlib: dllname, importc: "gluTessCallback".}
-proc gluGetTessProperty*(tess: PGLUtesselator, which: GLenum, value: ptr GLdouble){.
+proc gluGetTessProperty*(tess: GLUtesselator, which: GLenum, value: ptr GLdouble){.
     dynlib: dllname, importc: "gluGetTessProperty".}
-proc gluNewNurbsRenderer*(): PGLUnurbs{.dynlib: dllname,
+proc gluNewNurbsRenderer*(): GLUnurbs{.dynlib: dllname,
                                         importc: "gluNewNurbsRenderer".}
-proc gluDeleteNurbsRenderer*(nobj: PGLUnurbs){.dynlib: dllname,
+proc gluDeleteNurbsRenderer*(nobj: GLUnurbs){.dynlib: dllname,
     importc: "gluDeleteNurbsRenderer".}
-proc gluBeginSurface*(nobj: PGLUnurbs){.dynlib: dllname,
+proc gluBeginSurface*(nobj: GLUnurbs){.dynlib: dllname,
                                         importc: "gluBeginSurface".}
-proc gluBeginCurve*(nobj: PGLUnurbs){.dynlib: dllname, importc: "gluBeginCurve".}
-proc gluEndCurve*(nobj: PGLUnurbs){.dynlib: dllname, importc: "gluEndCurve".}
-proc gluEndSurface*(nobj: PGLUnurbs){.dynlib: dllname, importc: "gluEndSurface".}
-proc gluBeginTrim*(nobj: PGLUnurbs){.dynlib: dllname, importc: "gluBeginTrim".}
-proc gluEndTrim*(nobj: PGLUnurbs){.dynlib: dllname, importc: "gluEndTrim".}
-proc gluPwlCurve*(nobj: PGLUnurbs, count: GLint, aarray: ptr GLfloat,
+proc gluBeginCurve*(nobj: GLUnurbs){.dynlib: dllname, importc: "gluBeginCurve".}
+proc gluEndCurve*(nobj: GLUnurbs){.dynlib: dllname, importc: "gluEndCurve".}
+proc gluEndSurface*(nobj: GLUnurbs){.dynlib: dllname, importc: "gluEndSurface".}
+proc gluBeginTrim*(nobj: GLUnurbs){.dynlib: dllname, importc: "gluBeginTrim".}
+proc gluEndTrim*(nobj: GLUnurbs){.dynlib: dllname, importc: "gluEndTrim".}
+proc gluPwlCurve*(nobj: GLUnurbs, count: GLint, aarray: ptr GLfloat,
                   stride: GLint, atype: GLenum){.dynlib: dllname,
     importc: "gluPwlCurve".}
-proc gluNurbsCurve*(nobj: PGLUnurbs, nknots: GLint, knot: ptr GLfloat,
+proc gluNurbsCurve*(nobj: GLUnurbs, nknots: GLint, knot: ptr GLfloat,
                     stride: GLint, ctlarray: ptr GLfloat, order: GLint,
                     atype: GLenum){.dynlib: dllname, importc: "gluNurbsCurve".}
-proc gluNurbsSurface*(nobj: PGLUnurbs, sknot_count: GLint, sknot: ptr GLfloat,
+proc gluNurbsSurface*(nobj: GLUnurbs, sknot_count: GLint, sknot: ptr GLfloat,
                       tknot_count: GLint, tknot: ptr GLfloat,
                       s_stride, t_stride: GLint, ctlarray: ptr GLfloat,
                       sorder, torder: GLint, atype: GLenum){.dynlib: dllname,
     importc: "gluNurbsSurface".}
-proc gluLoadSamplingMatrices*(nobj: PGLUnurbs,
+proc gluLoadSamplingMatrices*(nobj: GLUnurbs,
                               modelMatrix, projMatrix: var T16dArray,
-                              viewport: var TViewPortArray){.dynlib: dllname,
+                              viewport: var ViewPortArray){.dynlib: dllname,
     importc: "gluLoadSamplingMatrices".}
-proc gluNurbsProperty*(nobj: PGLUnurbs, aproperty: GLenum, value: GLfloat){.
+proc gluNurbsProperty*(nobj: GLUnurbs, aproperty: GLenum, value: GLfloat){.
     dynlib: dllname, importc: "gluNurbsProperty".}
-proc gluGetNurbsProperty*(nobj: PGLUnurbs, aproperty: GLenum, value: ptr GLfloat){.
+proc gluGetNurbsProperty*(nobj: GLUnurbs, aproperty: GLenum, value: ptr GLfloat){.
     dynlib: dllname, importc: "gluGetNurbsProperty".}
-proc gluNurbsCallback*(nobj: PGLUnurbs, which: GLenum, fn: TCallBack){.
+proc gluNurbsCallback*(nobj: GLUnurbs, which: GLenum, fn: CallBack){.
     dynlib: dllname, importc: "gluNurbsCallback".}
   #*** Callback function prototypes ***
 type                          # gluQuadricCallback
@@ -313,11 +304,11 @@ const                         # Version
   GLU_NURBS_ERROR36* = 100286
   GLU_NURBS_ERROR37* = 100287 #***           Backwards compatibility for old tesselator           ****/
 
-proc gluBeginPolygon*(tess: PGLUtesselator){.dynlib: dllname,
+proc gluBeginPolygon*(tess: GLUtesselator){.dynlib: dllname,
     importc: "gluBeginPolygon".}
-proc gluNextContour*(tess: PGLUtesselator, atype: GLenum){.dynlib: dllname,
+proc gluNextContour*(tess: GLUtesselator, atype: GLenum){.dynlib: dllname,
     importc: "gluNextContour".}
-proc gluEndPolygon*(tess: PGLUtesselator){.dynlib: dllname,
+proc gluEndPolygon*(tess: GLUtesselator){.dynlib: dllname,
     importc: "gluEndPolygon".}
 const                         # Contours types -- obsolete!
   GLU_CW* = 100120
