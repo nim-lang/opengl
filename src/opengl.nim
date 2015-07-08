@@ -140,8 +140,8 @@ type
   GLint64EXT* = int64
   GLuint64EXT* = uint64
   GLint64* = int64
-  GLsizeiptrArb* = int32
-  GLsizeiptr* = int32
+  GLsizeiptrArb* = int
+  GLsizeiptr* = int
   GLsync* = distinct pointer
   GLuint64* = uint64
   GLvectorub2* = array[0..1, GLubyte]
