@@ -88,7 +88,6 @@ proc reshape(width: GLsizei, height: GLsizei) {.cdecl.} =
   # Enable perspective projection with fovy, aspect, zNear and zFar
   gluPerspective(45.0, width / height, 0.1, 100.0)
 
-loadExtensions()
 glutInit()
 glutInitDisplayMode(GLUT_DOUBLE)
 glutInitWindowSize(640, 480)
@@ -97,6 +96,8 @@ discard glutCreateWindow("OpenGL Example")
 
 glutDisplayFunc(display)
 glutReshapeFunc(reshape)
+
+loadExtensions()
 
 glClearColor(0.0, 0.0, 0.0, 1.0)                   # Set background color to black and opaque
 glClearDepth(1.0)                                 # Set background depth to farthest
