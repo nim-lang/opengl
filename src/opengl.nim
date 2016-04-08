@@ -384,7 +384,10 @@ macro wrapErrorChecking(f: stmt): stmt {.immediate.} =
   result = newStmtList()
 
   for child in f.children:
+    if child.kind == nnkCommentStmt:
+      continue
     child.expectKind nnkProcDef
+
     let params = toSeq(child.params.children)
     var glProc = copy child
     glProc.pragma = newNimNode(nnkPragma).add(
@@ -3244,6 +3247,123 @@ wrapErrorChecking:
   proc glVertexAttribPointerNV(index: GLuint, fsize: GLint, `type`: GLenum, stride: GLsizei, `pointer`: pointer) {.importc.}
   proc glColorTable(target: GLenum, internalformat: GLenum, width: GLsizei, format: GLenum, `type`: GLenum, table: pointer) {.importc.}
   proc glProgramUniformMatrix2x3dv(program: GLuint, location: GLint, count: GLsizei, transpose: GLboolean, value: ptr GLdouble) {.importc.}
+
+  ## # GL_ARB_direct_state_access
+  proc glCreateTransformFeedbacks(n: GLsizei; ids: ptr GLuint) {.importc.}
+  proc glTransformFeedbackBufferBase(xfb: GLuint; index: GLuint; buffer: GLuint) {.importc.}
+  proc glTransformFeedbackBufferRange(xfb: GLuint; index: GLuint; buffer: GLuint; offset: GLintptr; size: GLsizeiptr) {.importc.}
+  proc glGetTransformFeedbackiv(xfb: GLuint; pname: GLenum; param: ptr cint) {.importc.}
+  proc glGetTransformFeedbacki_v(xfb: GLuint; pname: GLenum; index: GLuint; param: ptr cint) {.importc.}
+  proc glGetTransformFeedbacki64_v(xfb: GLuint; pname: GLenum; index: GLuint; param: ptr GLint64) {.importc.}
+  ## # Buffer object functions 
+
+  proc glCreateBuffers(n: GLsizei; buffers: ptr GLuint) {.importc.}
+  proc glNamedBufferStorage(buffer: GLuint; size: GLsizeiptr; data: pointer; flags: GLbitfield) {.importc.}
+  proc glNamedBufferData(buffer: GLuint; size: GLsizeiptr; data: pointer; usage: GLenum) {.importc.}
+  proc glNamedBufferSubData(buffer: GLuint; offset: GLintptr; size: GLsizeiptr; data: pointer) {.importc.}
+  proc glCopyNamedBufferSubData(readBuffer: GLuint; writeBuffer: GLuint; readOffset: GLintptr; writeOffset: GLintptr; size: GLsizeiptr) {.importc.}
+  proc glClearNamedBufferData(buffer: GLuint; internalformat: GLenum; format: GLenum; `type`: GLenum; data: pointer) {.importc.}
+  proc glClearNamedBufferSubData(buffer: GLuint; internalformat: GLenum; offset: GLintptr; size: GLsizeiptr; format: GLenum; `type`: GLenum; data: pointer) {.importc.}
+  proc glMapNamedBuffer(buffer: GLuint; access: GLenum): pointer {.importc.}
+  proc glMapNamedBufferRange(buffer: GLuint; offset: GLintptr; length: GLsizeiptr; access: GLbitfield): pointer {.importc.}
+  proc glUnmapNamedBuffer(buffer: GLuint): GLboolean {.importc.}
+  proc glFlushMappedNamedBufferRange(buffer: GLuint; offset: GLintptr; length: GLsizeiptr) {.importc.}
+  proc glGetNamedBufferParameteriv(buffer: GLuint; pname: GLenum; params: ptr cint) {.importc.}
+  proc glGetNamedBufferParameteri64v(buffer: GLuint; pname: GLenum; params: ptr GLint64) {.importc.}
+  proc glGetNamedBufferPointerv(buffer: GLuint; pname: GLenum; params: ptr pointer) {.importc.}
+  proc glGetNamedBufferSubData(buffer: GLuint; offset: GLintptr; size: GLsizeiptr; data: pointer) {.importc.}
+  ## # Framebuffer object functions 
+
+  proc glCreateFramebuffers(n: GLsizei; framebuffers: ptr GLuint) {.importc.}
+  proc glNamedFramebufferRenderbuffer(framebuffer: GLuint; attachment: GLenum; renderbuffertarget: GLenum; renderbuffer: GLuint) {.importc.}
+  proc glNamedFramebufferParameteri(framebuffer: GLuint; pname: GLenum; param: cint) {.importc.}
+  proc glNamedFramebufferTexture(framebuffer: GLuint; attachment: GLenum; texture: GLuint; level: cint) {.importc.}
+  proc glNamedFramebufferTextureLayer(framebuffer: GLuint; attachment: GLenum; texture: GLuint; level: cint; layer: cint) {.importc.}
+  proc glNamedFramebufferDrawBuffer(framebuffer: GLuint; mode: GLenum) {.importc.}
+  proc glNamedFramebufferDrawBuffers(framebuffer: GLuint; n: GLsizei; bufs: ptr GLenum) {.importc.}
+  proc glNamedFramebufferReadBuffer(framebuffer: GLuint; mode: GLenum) {.importc.}
+  proc glInvalidateNamedFramebufferData(framebuffer: GLuint; numAttachments: GLsizei; attachments: ptr GLenum) {.importc.}
+  proc glInvalidateNamedFramebufferSubData(framebuffer: GLuint; numAttachments: GLsizei; attachments: ptr GLenum; x: cint; y: cint; width: GLsizei; height: GLsizei) {.importc.}
+  proc glClearNamedFramebufferiv(framebuffer: GLuint; buffer: GLenum; drawbuffer: cint; value: ptr cint) {.importc.}
+  proc glClearNamedFramebufferuiv(framebuffer: GLuint; buffer: GLenum; drawbuffer: cint; value: ptr GLuint) {.importc.}
+  proc glClearNamedFramebufferfv(framebuffer: GLuint; buffer: GLenum; drawbuffer: cint; value: ptr cfloat) {.importc.}
+  proc glClearNamedFramebufferfi(framebuffer: GLuint; buffer: GLenum; drawbuffer: cint; depth: cfloat; stencil: cint) {.importc.}
+  proc glBlitNamedFramebuffer(readFramebuffer: GLuint; drawFramebuffer: GLuint; srcX0: cint; srcY0: cint; srcX1: cint; srcY1: cint; dstX0: cint; dstY0: cint; dstX1: cint; dstY1: cint; mask: GLbitfield; filter: GLenum) {.importc.}
+  proc glCheckNamedFramebufferStatus(framebuffer: GLuint; target: GLenum): GLenum {.importc.}
+  proc glGetNamedFramebufferParameteriv(framebuffer: GLuint; pname: GLenum; param: ptr cint) {.importc.}
+  proc glGetNamedFramebufferAttachmentParameteriv(framebuffer: GLuint; attachment: GLenum; pname: GLenum; params: ptr cint) {.importc.}
+  ## # Renderbuffer object functions 
+
+  proc glCreateRenderbuffers(n: GLsizei; renderbuffers: ptr GLuint) {.importc.}
+  proc glNamedRenderbufferStorage(renderbuffer: GLuint; internalformat: GLenum; width: GLsizei; height: GLsizei) {.importc.}
+  proc glNamedRenderbufferStorageMultisample(renderbuffer: GLuint; samples: GLsizei; internalformat: GLenum; width: GLsizei; height: GLsizei) {.importc.}
+  proc glGetNamedRenderbufferParameteriv(renderbuffer: GLuint; pname: GLenum; params: ptr cint) {.importc.}
+  ## # Texture object functions 
+
+  proc glCreateTextures(target: GLenum; n: GLsizei; textures: ptr GLuint) {.importc.}
+  proc glTextureBuffer(texture: GLuint; internalformat: GLenum; buffer: GLuint) {.importc.}
+  proc glTextureBufferRange(texture: GLuint; internalformat: GLenum; buffer: GLuint; offset: GLintptr; size: GLsizeiptr) {.importc.}
+  proc glTextureStorage1D(texture: GLuint; levels: GLsizei; internalformat: GLenum; width: GLsizei) {.importc.}
+  proc glTextureStorage2D(texture: GLuint; levels: GLsizei; internalformat: GLenum; width: GLsizei; height: GLsizei) {.importc.}
+  proc glTextureStorage3D(texture: GLuint; levels: GLsizei; internalformat: GLenum; width: GLsizei; height: GLsizei; depth: GLsizei) {.importc.}
+  proc glTextureStorage2DMultisample(texture: GLuint; samples: GLsizei; internalformat: GLenum; width: GLsizei; height: GLsizei; fixedsamplelocations: GLboolean) {.importc.}
+  proc glTextureStorage3DMultisample(texture: GLuint; samples: GLsizei; internalformat: GLenum; width: GLsizei; height: GLsizei; depth: GLsizei; fixedsamplelocations: GLboolean) {.importc.}
+  proc glTextureSubImage1D(texture: GLuint; level: cint; xoffset: cint; width: GLsizei; format: GLenum; `type`: GLenum; pixels: pointer) {.importc.}
+  proc glTextureSubImage2D(texture: GLuint; level: cint; xoffset: cint; yoffset: cint; width: GLsizei; height: GLsizei; format: GLenum; `type`: GLenum; pixels: pointer) {.importc.}
+  proc glTextureSubImage3D(texture: GLuint; level: cint; xoffset: cint; yoffset: cint; zoffset: cint; width: GLsizei; height: GLsizei; depth: GLsizei; format: GLenum; `type`: GLenum; pixels: pointer) {.importc.}
+  proc glCompressedTextureSubImage1D(texture: GLuint; level: cint; xoffset: cint; width: GLsizei; format: GLenum; imageSize: GLsizei; data: pointer) {.importc.}
+  proc glCompressedTextureSubImage2D(texture: GLuint; level: cint; xoffset: cint; yoffset: cint; width: GLsizei; height: GLsizei; format: GLenum; imageSize: GLsizei; data: pointer) {.importc.}
+  proc glCompressedTextureSubImage3D(texture: GLuint; level: cint; xoffset: cint; yoffset: cint; zoffset: cint; width: GLsizei; height: GLsizei; depth: GLsizei; format: GLenum; imageSize: GLsizei; data: pointer) {.importc.}
+  proc glCopyTextureSubImage1D(texture: GLuint; level: cint; xoffset: cint; x: cint; y: cint; width: GLsizei) {.importc.}
+  proc glCopyTextureSubImage2D(texture: GLuint; level: cint; xoffset: cint; yoffset: cint; x: cint; y: cint; width: GLsizei; height: GLsizei) {.importc.}
+  proc glCopyTextureSubImage3D(texture: GLuint; level: cint; xoffset: cint; yoffset: cint; zoffset: cint; x: cint; y: cint; width: GLsizei; height: GLsizei) {.importc.}
+  proc glTextureParameterf(texture: GLuint; pname: GLenum; param: cfloat) {.importc.}
+  proc glTextureParameterfv(texture: GLuint; pname: GLenum; param: ptr cfloat) {.importc.}
+  proc glTextureParameteri(texture: GLuint; pname: GLenum; param: cint) {.importc.}
+  proc glTextureParameterIiv(texture: GLuint; pname: GLenum; params: ptr cint) {.importc.}
+  proc glTextureParameterIuiv(texture: GLuint; pname: GLenum; params: ptr GLuint) {.importc.}
+  proc glTextureParameteriv(texture: GLuint; pname: GLenum; param: ptr cint) {.importc.}
+  proc glGenerateTextureMipmap(texture: GLuint) {.importc.}
+  proc glBindTextureUnit(unit: GLuint; texture: GLuint) {.importc.}
+  proc glGetTextureImage(texture: GLuint; level: cint; format: GLenum; `type`: GLenum; bufSize: GLsizei; pixels: pointer) {.importc.}
+                         
+  proc glGetCompressedTextureImage(texture: GLuint; level: cint; bufSize: GLsizei; pixels: pointer) {.importc.}
+  proc glGetTextureLevelParameterfv(texture: GLuint; level: cint; pname: GLenum; params: ptr cfloat) {.importc.}
+  proc glGetTextureLevelParameteriv(texture: GLuint; level: cint; pname: GLenum; params: ptr cint) {.importc.}
+  proc glGetTextureParameterfv(texture: GLuint; pname: GLenum; params: ptr cfloat) {.importc.}
+  proc glGetTextureParameterIiv(texture: GLuint; pname: GLenum; params: ptr cint) {.importc.}
+  proc glGetTextureParameterIuiv(texture: GLuint; pname: GLenum; params: ptr GLuint) {.importc.}
+  proc glGetTextureParameteriv(texture: GLuint; pname: GLenum; params: ptr cint) {.importc.}
+  ## # Vertex Array object functions 
+
+  proc glCreateVertexArrays(n: GLsizei; arrays: ptr GLuint) {.importc.}
+  proc glDisableVertexArrayAttrib(vaobj: GLuint; index: GLuint) {.importc.}
+  proc glEnableVertexArrayAttrib(vaobj: GLuint; index: GLuint) {.importc.}
+  proc glVertexArrayElementBuffer(vaobj: GLuint; buffer: GLuint) {.importc.}
+  proc glVertexArrayVertexBuffer(vaobj: GLuint; bindingindex: GLuint; buffer: GLuint; offset: GLintptr; stride: GLsizei) {.importc.}
+  proc glVertexArrayVertexBuffers(vaobj: GLuint; first: GLuint; count: GLsizei; buffers: ptr GLuint; offsets: ptr GLintptr; strides: ptr GLsizei) {.importc.}
+  proc glVertexArrayAttribFormat(vaobj: GLuint; attribindex: GLuint; size: cint; `type`: GLenum; normalized: GLboolean; relativeoffset: GLuint) {.importc.}
+  proc glVertexArrayAttribIFormat(vaobj: GLuint; attribindex: GLuint; size: cint; `type`: GLenum; relativeoffset: GLuint) {.importc.}
+  proc glVertexArrayAttribLFormat(vaobj: GLuint; attribindex: GLuint; size: cint; `type`: GLenum; relativeoffset: GLuint) {.importc.}
+  proc glVertexArrayAttribBinding(vaobj: GLuint; attribindex: GLuint; bindingindex: GLuint) {.importc.}
+  proc glVertexArrayBindingDivisor(vaobj: GLuint; bindingindex: GLuint; divisor: GLuint) {.importc.}
+  proc glGetVertexArrayiv(vaobj: GLuint; pname: GLenum; param: ptr cint) {.importc.}
+  proc glGetVertexArrayIndexediv(vaobj: GLuint; index: GLuint; pname: GLenum; param: ptr cint) {.importc.}
+  proc glGetVertexArrayIndexed64iv(vaobj: GLuint; index: GLuint; pname: GLenum; param: ptr GLint64) {.importc.}
+  ## # Sampler object functions 
+
+  proc glCreateSamplers(n: GLsizei; samplers: ptr GLuint) {.importc.}
+  ## # Program Pipeline object functions 
+
+  proc glCreateProgramPipelines(n: GLsizei; pipelines: ptr GLuint) {.importc.}
+  ## # Query object functions 
+
+  proc glCreateQueries(target: GLenum; n: GLsizei; ids: ptr GLuint) {.importc.}
+  proc glGetQueryBufferObjectiv(id: GLuint; buffer: GLuint; pname: GLenum; offset: GLintptr) {.importc.}
+  proc glGetQueryBufferObjectuiv(id: GLuint; buffer: GLuint; pname: GLenum; offset: GLintptr) {.importc.}
+  proc glGetQueryBufferObjecti64v(id: GLuint; buffer: GLuint; pname: GLenum; offset: GLintptr) {.importc.}
+  proc glGetQueryBufferObjectui64v(id: GLuint; buffer: GLuint; pname: GLenum; offset: GLintptr) {.importc.}
+
 {.pop.} # stdcall, hint[XDeclaredButNotUsed]: off, warning[SmallLshouldNotBeUsed]: off.
 
 const
