@@ -22,7 +22,7 @@ import macros, sequtils
 
 {.push warning[User]: off.}
 
-when defined(linux) and not defined(android):
+when defined(linux) and not defined(android) and not defined(emscripten):
   import X, XLib, XUtil
 elif defined(windows):
   import winlean, os
@@ -51,7 +51,7 @@ elif defined(ios):
   {.pragma: ogl.}
   {.pragma: oglx.}
   {.passC: "-framework OpenGLES", passL: "-framework OpenGLES".}
-elif defined(android) or defined(js):
+elif defined(android) or defined(js) or defined(emscripten):
   {.pragma: ogl.}
   {.pragma: oglx.}
 else:
