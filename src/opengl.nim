@@ -329,6 +329,17 @@ else:
   TGLMatrix4d: GLmatrixd4,
 ].}
 
+proc `==`*(a: GLenum, b: GLenum): bool {.borrow.}
+
+proc `==`*(a: GLbitfield, b: GLbitfield): bool {.borrow.}
+
+proc `or`*(a: GLbitfield, b: GLbitfield): GLbitfield {.borrow.}
+
+# also maybe for table look up:
+proc hash*(x: GLenum): int =
+  ## efficient hashing of integers (taken from hashes module)
+  result = x.int
+
 proc glGetError*: GLenum {.stdcall, importc, ogl.}
 proc getGLerrorCode*: GLerrorCode = glGetError().GLerrorCode
   ## Like ``glGetError`` but returns an enumerator instead.
