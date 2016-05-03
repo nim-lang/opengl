@@ -336,7 +336,6 @@ proc `==`*(a, b: GLbitfield): bool {.borrow.}
 proc `or`*(a, b: GLbitfield): GLbitfield {.borrow.}
 
 proc hash*(x: GLenum): int =
-  ## efficient hashing of integers (taken from hashes module)
   result = x.int
 
 proc glGetError*: GLenum {.stdcall, importc, ogl.}
