@@ -135,8 +135,8 @@ type
   GLfixed* = int32
   GLhalfNv* = uint16
   GLvdpauSurfaceNv* = uint
-  GLintptr* = int32
-  GLintptrArb* = int32
+  GLintptr* = int
+  GLintptrArb* = int
   GLint64EXT* = int64
   GLuint64EXT* = uint64
   GLint64* = int64
