@@ -247,6 +247,7 @@ proc glutInitDisplayString*(str: cstring)
 proc glutInitWindowPosition*(x, y: int)
 proc glutInitWindowSize*(width, height: int)
 proc glutMainLoop*()
+proc glutGet*(state: GLenum): int
   # GLUT window sub-API.
 proc glutCreateWindow*(title: cstring): int
 proc glutCreateSubWindow*(win, x, y, width, height: int): int
