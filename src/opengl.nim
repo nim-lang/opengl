@@ -66,9 +66,9 @@ else:
       symAddr(oglHandle, "wglGetProcAddress"))
   elif defined(linux):
     var glxGetProcAddress = cast[proc (s: cstring): pointer {.cdecl.}](
-      symAddr(oglHandle, "glxGetProcAddress"))
+      symAddr(oglHandle, "glXGetProcAddress"))
     var glxGetProcAddressArb = cast[proc (s: cstring): pointer {.cdecl.}](
-      symAddr(oglHandle, "glxGetProcAddressARB"))
+      symAddr(oglHandle, "glXGetProcAddressARB"))
 
   proc glGetProc(h: LibHandle; procName: cstring): pointer =
     when defined(windows):
