@@ -117,7 +117,7 @@ type
   GLbitfield* = distinct uint32
   GLvoid* = pointer
   GLbyte* = int8
-  GLshort* = int64
+  GLshort* = int16
   GLint* = int32
   GLclampx* = int32
   GLubyte* = uint8
