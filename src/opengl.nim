@@ -226,7 +226,7 @@ type
     glErrInvalidFramebufferOperation = (0x0506, "invalid framebuffer operation")
     glErrTableTooLarge = (0x8031, "table too large")
 
-const AllErrorCodes = {
+const AllErrorCodes = [
     glErrNoError,
     glErrInvalidEnum,
     glErrInvalidValue,
@@ -236,7 +236,7 @@ const AllErrorCodes = {
     glErrOutOfMem,
     glErrInvalidFramebufferOperation,
     glErrTableTooLarge,
-}
+]
 
 when defined(macosx):
   type
