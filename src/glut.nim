@@ -278,6 +278,7 @@ proc glutHideOverlay*()
   # GLUT menu sub-API.
 proc glutCreateMenu*(callback: TGlut1IntCallback): int
 proc glutDestroyMenu*(menu: int)
+proc glutGetMenu*(): int
 proc glutSetMenu*(menu: int)
 proc glutAddMenuEntry*(caption: cstring, value: int)
 proc glutAddSubMenu*(caption: cstring, submenu: int)
@@ -288,6 +289,7 @@ proc glutAttachMenu*(button: int)
 proc glutDetachMenu*(button: int)
   # GLUT window callback sub-API.
 proc glutDisplayFunc*(f: TGlutVoidCallback)
+proc glutCloseFunc*(f: TGlutVoidCallback)
 proc glutReshapeFunc*(f: TGlut2IntCallback)
 proc glutKeyboardFunc*(f: TGlut1Char2IntCallback)
 proc glutMouseFunc*(f: TGlut4IntCallback)
@@ -317,7 +319,11 @@ proc glutSetColor*(cell: int, red, green, blue: GLfloat)
 proc glutGetColor*(ndx, component: int): GLfloat
 proc glutCopyColormap*(win: int)
   # GLUT state retrieval sub-API.
+proc glutGet*(t: TGLenum): int
+proc glutDeviceGet*(t: TGLenum): int
   # GLUT extension support sub-API
+proc glutGetModifiers*(): int
+proc glutLayerGet*(t: TGLenum): int
 proc glutExtensionSupported*(name: cstring): int
   # GLUT font sub-API
 proc glutBitmapCharacter*(font: pointer, character: int)
@@ -360,6 +366,7 @@ proc glutForceJoystickFunc*()
   # GLUT game mode sub-API.
   #example glutGameModeString('1280x1024:32@75');
 proc glutGameModeString*(AString: cstring)
+proc glutEnterGameMode*()
 proc glutLeaveGameMode*()
 proc glutGameModeGet*(mode: GLenum): int
 # implementation
