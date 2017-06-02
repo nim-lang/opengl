@@ -12,4 +12,4 @@ srcDir = "src"
 when defined(windows):
   requires "nim >= 0.10.3"
 else:
-  requires "nim >= 0.10.3, x11"
+  requires "nim >= 0.10.3", "x11"
