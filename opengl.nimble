@@ -7,6 +7,9 @@ license = "MIT"
 
 srcDir = "src"
 
-# Dependencies"
+# Dependencies
 
-requires "nim >= 0.10.3", "x11"
+when defined(windows):
+  requires "nim >= 0.10.3"
+else:
+  requires "nim >= 0.10.3", "x11"
