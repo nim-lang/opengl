@@ -15,4 +15,5 @@
 ## You need to call ``loadExtensions`` after a rendering context has been
 ## created to load any extension proc that your code uses.
 
-include opengl_prelude, opengl_types, opengl_errors, opengl_procs, opengl_constants
+include opengl/private/prelude, opengl/private/types,
+    opengl/private/errors, opengl/private/procs, opengl/private/constants
