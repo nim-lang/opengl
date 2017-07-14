@@ -682,6 +682,7 @@ wrapErrorChecking:
   proc glVertexAttribI2i(index: GLuint, x: GLint, y: GLint)
   proc glGetDriverControlStringQCOM(driverControl: GLuint, bufSize: GLsizei, length: ptr GLsizei, driverControlString: cstring)
   proc glGetTexLevelParameteriv(target: GLenum, level: GLint, pname: GLenum, params: ptr GLint)
+  proc glGetTextureSubImage(texture: GLuint; level: GLint; xoffset: GLint; yoffset: GLint; zoffset: GLint; width: GLsizei; height: GLsizei; depth: GLsizei; format: GLenum; `type`: GLenum; bufSize: GLsizei; pixels: pointer)
   proc glGetHandleARB(pname: GLenum): GLhandleArb
   proc glIndexubv(c: ptr GLubyte)
   proc glBlendFunciARB(buf: GLuint, src: GLenum, dst: GLenum)
