@@ -88,7 +88,8 @@ proc reshape(width: GLsizei, height: GLsizei) {.cdecl.} =
   # Enable perspective projection with fovy, aspect, zNear and zFar
   gluPerspective(45.0, width / height, 0.1, 100.0)
 
-glutInit()
+var argc: cint = 0
+glutInit(addr argc, nil)
 glutInitDisplayMode(GLUT_DOUBLE)
 glutInitWindowSize(640, 480)
 glutInitWindowPosition(50, 50)
