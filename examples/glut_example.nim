@@ -1,8 +1,8 @@
 # OpenGL example using glut
-
-import glut
+# On windows: Requires glut32.dll or freeglut.dll
+import opengl/glut
 import opengl
-import glu
+import opengl/glu
 
 proc display() {.cdecl.} =
   glClear(GL_COLOR_BUFFER_BIT or GL_DEPTH_BUFFER_BIT) # Clear color and depth buffers
