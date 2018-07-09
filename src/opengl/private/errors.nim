@@ -38,7 +38,7 @@ macro wrapErrorChecking*(f: untyped): typed =
     if rawGLprocName == "glEnd":
       body.add newAssignment(ident"gInsideBeginEnd", ident"false")
 
-    template errCheck: stmt =
+    template errCheck: untyped =
       when not (NoAutoGLerrorCheck):
         if gAutoGLerrorCheck and not gInsideBeginEnd:
           checkGLerror()
