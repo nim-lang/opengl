@@ -21,7 +21,7 @@ import opengl
 
 when defined(windows):
   const
-    dllname = "glut32.dll"
+    dllname = "(freeglut.dll|glut32.dll)"
 elif defined(macosx):
   const
     dllname = "/System/Library/Frameworks/GLUT.framework/GLUT"
