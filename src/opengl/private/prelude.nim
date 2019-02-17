@@ -2,7 +2,7 @@
 {.push warning[User]: off.}
 
 when defined(linux) and not defined(android) and not defined(emscripten):
-  import X, XLib, XUtil
+  import x11/X, x11/XLib, x11/XUtil
 elif defined(windows):
   import winlean, os
 

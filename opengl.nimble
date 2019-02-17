@@ -1,6 +1,6 @@
 # Package
 
-version = "1.2.0"
+version = "1.2.1"
 author = "Andreas Rumpf"
 description = "an OpenGL wrapper"
 license = "MIT"
@@ -12,4 +12,4 @@ srcDir = "src"
 when defined(windows):
   requires "nim >= 0.11.0"
 else:
-  requires "nim >= 0.11.0", "x11"
+  requires "nim >= 0.11.0", "x11 >= 1.1"
