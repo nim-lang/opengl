@@ -96,6 +96,8 @@ const
   GLUT_NORMAL* = 0
   GLUT_OVERLAY* = 1
 
+{.push dynlib: dllname, importc.}
+
 when defined(Windows):
   const                       # Stroke font constants (use these in GLUT program).
     GLUT_STROKE_ROMAN* = cast[pointer](0)
@@ -109,15 +111,27 @@ when defined(Windows):
     GLUT_BITMAP_HELVETICA_18* = cast[pointer](8)
 else:
   var                         # Stroke font constants (use these in GLUT program).
-    GLUT_STROKE_ROMAN*: pointer
-    GLUT_STROKE_MONO_ROMAN*: pointer # Bitmap font constants (use these in GLUT program).
-    GLUT_BITMAP_9_BY_15*: pointer
-    GLUT_BITMAP_8_BY_13*: pointer
-    GLUT_BITMAP_TIMES_ROMAN_10*: pointer
-    GLUT_BITMAP_TIMES_ROMAN_24*: pointer
-    GLUT_BITMAP_HELVETICA_10*: pointer
-    GLUT_BITMAP_HELVETICA_12*: pointer
-    GLUT_BITMAP_HELVETICA_18*: pointer
+    glutStrokeRoman {.importc: "glutStrokeRoman".}: pointer
+    glutStrokeMonoRoman {.importc: "glutStrokeMonoRoman".}: pointer # Bitmap font constants (use these in GLUT program).
+    glutBitmap9By15 {.importc: "glutBitmap9By15".}: pointer
+    glutBitmap8By13 {.importc: "glutBitmap8By13".}: pointer
+    glutBitmapTimesRoman10 {.importc: "glutBitmapTimesRoman10".}: pointer
+    glutBitmapTimesRoman24 {.importc: "glutBitmapTimesRoman24".}: pointer
+    glutBitmapHelvetica10 {.importc: "glutBitmapHelvetica10".}: pointer
+    glutBitmapHelvetica12 {.importc: "glutBitmapHelvetica12".}: pointer
+    glutBitmapHelvetica18 {.importc: "glutBitmapHelvetica18".}: pointer
+
+  let
+    GLUT_STROKE_ROMAN*      = cast[pointer](addr glutStrokeRoman)
+    GLUT_STROKE_MONO_ROMAN* = cast[pointer](addr glutStrokeMonoRoman)
+    GLUT_BITMAP_9_BY_15* = cast[pointer](addr glutBitmap9By15)
+    GLUT_BITMAP_8_BY_13* = cast[pointer](addr glutBitmap8By13)
+    GLUT_BITMAP_TIMES_ROMAN_10* = cast[pointer](addr glutBitmapTimesRoman10)
+    GLUT_BITMAP_TIMES_ROMAN_24* = cast[pointer](addr glutBitmapTimesRoman24)
+    GLUT_BITMAP_HELVETICA_10* = cast[pointer](addr glutBitmapHelvetica10)
+    GLUT_BITMAP_HELVETICA_12* = cast[pointer](addr glutBitmapHelvetica12)
+    GLUT_BITMAP_HELVETICA_18* = cast[pointer](addr glutBitmapHelvetica18)
+
 const                         # glutGet parameters.
   GLUT_WINDOW_X* = 100
   GLUT_WINDOW_Y* = 101
@@ -232,7 +246,6 @@ const                         # glutGet parameters.
   GLUT_GAME_MODE_REFRESH_RATE* = 5
   GLUT_GAME_MODE_DISPLAY_CHANGED* = 6 # GLUT initialization sub-API.
 
-{.push dynlib: dllname, importc.}
 proc glutInit*(argcp: ptr cint, argv: pointer)
 
 proc glutInit*() =
