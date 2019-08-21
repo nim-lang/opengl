@@ -23,7 +23,7 @@
 #  Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #
 
-import X, XLib, XUtil, opengl
+import x11/x, x11/xlib, x11/xutil, opengl
 
 {.deadCodeElim: on.}
 
