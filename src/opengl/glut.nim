@@ -247,14 +247,6 @@ const                         # glutGet parameters.
   GLUT_GAME_MODE_DISPLAY_CHANGED* = 6 # GLUT initialization sub-API.
 
 proc glutInit*(argcp: ptr cint, argv: pointer)
-
-proc glutInit*() =
-  ## version that passes `argc` and `argc` implicitely.
-  var
-    cmdLine {.importc: "cmdLine".}: array[0..255, cstring]
-    cmdCount {.importc: "cmdCount".}: cint
-  glutInit(addr(cmdCount), addr(cmdLine))
-
 proc glutInitDisplayMode*(mode: int16)
 proc glutInitDisplayString*(str: cstring)
 proc glutInitWindowPosition*(x, y: int)
@@ -377,3 +369,11 @@ proc glutLeaveGameMode*()
 proc glutGameModeGet*(mode: GLenum): int
 # implementation
 {.pop.} # dynlib: dllname, importc
+
+# Convenience procs
+proc glutInit*() =
+  ## version that passes `argc` and `argc` implicitely.
+  var
+    cmdLine {.importc: "cmdLine".}: array[0..255, cstring]
+    cmdCount {.importc: "cmdCount".}: cint
+  glutInit(addr(cmdCount), addr(cmdLine))
