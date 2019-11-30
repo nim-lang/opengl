@@ -33,6 +33,9 @@ when defined(windows):
 elif defined(macosx):
   const
     dllname = "/usr/X11R6/lib/libGL.dylib"
+elif defined(linux)
+  const
+    dllname = "libGL.so.1"
 else:
   const
     dllname = "libGL.so"
