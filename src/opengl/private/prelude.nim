@@ -65,6 +65,9 @@ else:
       result = symAddr(h, procName)
     if result == nil: raiseInvalidLibrary(procName)
 
+  proc glGetProc*(name: cstring): pointer {.inline.} =
+    glGetProc(oglHandle, name)
+
   var gluHandle: LibHandle
 
   proc gluGetProc(procname: cstring): pointer =
@@ -75,9 +78,9 @@ else:
 
   # undocumented 'dynlib' feature: the string literal is replaced by
   # the imported proc name:
-  {.pragma: ogl, dynlib: glGetProc(oglHandle, "0").}
-  {.pragma: oglx, dynlib: glGetProc(oglHandle, "0").}
-  {.pragma: wgl, dynlib: glGetProc(oglHandle, "0").}
+  {.pragma: ogl, dynlib: glGetProc("0").}
+  {.pragma: oglx, dynlib: glGetProc("0").}
+  {.pragma: wgl, dynlib: glGetProc("0").}
   {.pragma: glu, dynlib: gluGetProc("").}
 
   proc nimLoadProcs0() {.importc.}
