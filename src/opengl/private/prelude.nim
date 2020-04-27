@@ -1,11 +1,6 @@
 {.deadCodeElim: on.}
 {.push warning[User]: off.}
 
-when defined(linux) and not defined(android) and not defined(emscripten):
-  import x11/x, x11/xlib, x11/xutil
-elif defined(windows):
-  import winlean, os
-
 when defined(windows):
   const
     ogldll* = "OpenGL32.dll"
