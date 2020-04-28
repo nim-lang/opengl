@@ -1,6 +1,6 @@
 # Package
 
-version = "1.2.5"
+version = "1.2.6"
 author = "Andreas Rumpf"
 description = "an OpenGL wrapper"
 license = "MIT"
