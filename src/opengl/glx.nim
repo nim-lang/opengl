@@ -100,16 +100,16 @@ type                          # From XLib:
   TGLXDrawable* = GLXDrawable
   TGLXContextID* = GLXContextID
 
-  Bool = cint
+  GLXBool = cint
 
 proc glXChooseVisual*(dpy: PDisplay, screen: cint, attribList: ptr int32): PXVisualInfo{.
     cdecl, dynlib: dllname, importc: "glXChooseVisual".}
 proc glXCreateContext*(dpy: PDisplay, vis: PXVisualInfo, shareList: GLXContext,
-                       direct: Bool): GLXContext{.cdecl, dynlib: dllname,
+                       direct: GLXBool): GLXContext{.cdecl, dynlib: dllname,
     importc: "glXCreateContext".}
 proc glXDestroyContext*(dpy: PDisplay, ctx: GLXContext){.cdecl, dynlib: dllname,
     importc: "glXDestroyContext".}
-proc glXMakeCurrent*(dpy: PDisplay, drawable: GLXDrawable, ctx: GLXContext): Bool{.
+proc glXMakeCurrent*(dpy: PDisplay, drawable: GLXDrawable, ctx: GLXContext): GLXBool{.
     cdecl, dynlib: dllname, importc: "glXMakeCurrent".}
 proc glXCopyContext*(dpy: PDisplay, src, dst: GLXContext, mask: int32){.cdecl,
     dynlib: dllname, importc: "glXCopyContext".}
@@ -119,11 +119,11 @@ proc glXCreateGLXPixmap*(dpy: PDisplay, visual: PXVisualInfo, pixmap: XPixmap): 
     cdecl, dynlib: dllname, importc: "glXCreateGLXPixmap".}
 proc glXDestroyGLXPixmap*(dpy: PDisplay, pixmap: GLXPixmap){.cdecl,
     dynlib: dllname, importc: "glXDestroyGLXPixmap".}
-proc glXQueryExtension*(dpy: PDisplay, errorb, event: var cint): Bool{.cdecl,
+proc glXQueryExtension*(dpy: PDisplay, errorb, event: var cint): GLXBool{.cdecl,
     dynlib: dllname, importc: "glXQueryExtension".}
-proc glXQueryVersion*(dpy: PDisplay, maj, min: var cint): Bool{.cdecl,
+proc glXQueryVersion*(dpy: PDisplay, maj, min: var cint): GLXBool{.cdecl,
     dynlib: dllname, importc: "glXQueryVersion".}
-proc glXIsDirect*(dpy: PDisplay, ctx: GLXContext): Bool{.cdecl, dynlib: dllname,
+proc glXIsDirect*(dpy: PDisplay, ctx: GLXContext): GLXBool{.cdecl, dynlib: dllname,
     importc: "glXIsDirect".}
 proc glXGetConfig*(dpy: PDisplay, visual: PXVisualInfo, attrib: cint,
                    value: var cint): cint{.cdecl, dynlib: dllname,
@@ -147,7 +147,7 @@ proc glXGetClientString*(dpy: PDisplay, name: cint): cstring{.cdecl,
 proc glXCreateGLXPixmapMESA*(dpy: PDisplay, visual: PXVisualInfo,
                              pixmap: XPixmap, cmap: XColormap): GLXPixmap{.
     cdecl, dynlib: dllname, importc: "glXCreateGLXPixmapMESA".}
-proc glXReleaseBufferMESA*(dpy: PDisplay, d: GLXDrawable): Bool{.cdecl,
+proc glXReleaseBufferMESA*(dpy: PDisplay, d: GLXDrawable): GLXBool{.cdecl,
     dynlib: dllname, importc: "glXReleaseBufferMESA".}
 proc glXCopySubBufferMESA*(dpy: PDisplay, drawbale: GLXDrawable,
                            x, y, width, height: cint){.cdecl, dynlib: dllname,
