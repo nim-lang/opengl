@@ -23,7 +23,7 @@ macro wrapErrorChecking*(f: untyped): typed =
     var
       body = newStmtList glProc
       returnsSomething = child.params[0].kind != nnkEmpty
-      callParams = newSeq[when defined(nimnode): NimNode else: PNimrodNode]()
+      callParams = newSeq[NimNode]()
     for param in params[1 ..< params.len]:
       callParams.add param[0]
 
