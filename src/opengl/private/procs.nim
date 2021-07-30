@@ -2611,6 +2611,7 @@ wrapErrorChecking:
   proc glGetActiveUniform(program: GLuint, index: GLuint, bufSize: GLsizei, length: ptr GLsizei, size: ptr GLint, `type`: ptr GLenum, name: cstring)
   proc glGenAsyncMarkersSGIX(range: GLsizei): GLuint
   proc glClipControlARB(origin: GLenum, depth: GLenum)
+  proc glClipControl(origin: GLenum, depth: GLenum)
   proc glDrawElementsInstancedEXT(mode: GLenum, count: GLsizei, `type`: GLenum, indices: pointer, primcount: GLsizei)
   proc glGetFragmentMaterialivSGIX(face: GLenum, pname: GLenum, params: ptr GLint)
   proc glSwizzleEXT(res: GLuint, `in`: GLuint, outX: GLenum, outY: GLenum, outZ: GLenum, outW: GLenum)
