@@ -327,6 +327,7 @@ proc glutExtensionSupported*(name: cstring): int
   # GLUT font sub-API
 proc glutBitmapCharacter*(font: pointer, character: int)
 proc glutBitmapWidth*(font: pointer, character: int): int
+proc glutBitmapHeight*(font: pointer): int
 proc glutStrokeCharacter*(font: pointer, character: int)
 proc glutStrokeWidth*(font: pointer, character: int): int
 proc glutBitmapLength*(font: pointer, str: cstring): int
