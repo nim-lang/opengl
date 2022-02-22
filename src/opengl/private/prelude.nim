@@ -25,7 +25,7 @@ elif defined(ios):
   {.pragma: ogl.}
   {.pragma: oglx.}
   {.passC: "-framework OpenGLES", passL: "-framework OpenGLES".}
-elif defined(android) or defined(js) or defined(emscripten):
+elif defined(android) or defined(js) or defined(emscripten) or defined(wasm):
   {.pragma: ogl.}
   {.pragma: oglx.}
 else:
