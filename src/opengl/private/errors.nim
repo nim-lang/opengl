@@ -13,10 +13,10 @@ macro wrapErrorChecking*(f: untyped): typed =
 
     let params = toSeq(child.params.children)
     var glProc = copy child
-    glProc.pragma = newNimNode(nnkPragma).add(
-        newNimNode(nnkExprColonExpr).add(
-          ident"importc" , newLit($child.name))
-      ).add(ident"ogl")
+    glProc.pragma = newTree(nnkPragma,
+        newTree(nnkExprColonExpr,
+          ident"importc" , newLit($child.name)),
+        ident"ogl")
 
     let rawGLprocName = $glProc.name
     glProc.name = ident(rawGLprocName & "Impl")
@@ -46,7 +46,7 @@ macro wrapErrorChecking*(f: untyped): typed =
     body.add getAst(errCheck())
 
     var procc = newProc(child.name, params, body)
-    procc.pragma = newNimNode(nnkPragma).add(ident"inline")
+    procc.pragma = newTree(nnkPragma, ident"inline")
     procc.name = postfix(procc.name, "*")
     result.add procc
 
