@@ -22,9 +22,9 @@ when defined(useGlew):
   {.pragma: wgl, header: "<GL/wglew.h>".}
   {.pragma: glu, dynlib: gludll.}
   
-  proc glewInit()*: GLenum {.importc.}
+  proc glewInit*(): GLenum {.importc.}
   
-  proc loadExtensions()*: Glenum =
+  proc loadExtensions*(): Glenum =
     ## Just alias for glewInit
     glewInit()
 elif defined(ios):
