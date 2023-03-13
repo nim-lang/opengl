@@ -111,3 +111,6 @@ proc `==`*(a, b: GLenum): bool {.borrow.}
 proc `==`*(a, b: GLbitfield): bool {.borrow.}
 proc `or`*(a, b: GLbitfield): GLbitfield {.borrow.}
 proc hash*(x: GLenum): int = x.int
+
+when defined(useGlew):
+  proc glewInit*(): GLenum {.importc.}
