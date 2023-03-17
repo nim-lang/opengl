@@ -21,6 +21,13 @@ when defined(useGlew):
   {.pragma: oglx, header: "<GL/glxew.h>".}
   {.pragma: wgl, header: "<GL/wglew.h>".}
   {.pragma: glu, dynlib: gludll.}
+  
+  when defined(linux) or defined(windows):
+    {.passC: "-flto -useGlew".}
+    when defined(windows):
+      {.passL: "-lglew32 -lopengl32".}
+    elif defined(linux):
+      {.passL: "-lGLEW -lGL".}
 elif defined(ios):
   {.pragma: ogl.}
   {.pragma: oglx.}
