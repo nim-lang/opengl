@@ -6,11 +6,7 @@ when defined(windows):
     ogldll* = "OpenGL32.dll"
     gludll* = "GLU32.dll"
 elif defined(macosx):
-  #macosx has this notion of a framework, thus the path to the openGL dylib files
-  #is absolute
-  const
-    ogldll* = "/System/Library/Frameworks/OpenGL.framework/Versions/Current/Libraries/libGL.dylib"
-    gludll* = "/System/Library/Frameworks/OpenGL.framework/Versions/Current/Libraries/libGLU.dylib"
+  discard # not use now
 else:
   const
     ogldll* = "libGL.so.1"
@@ -28,6 +24,10 @@ when defined(useGlew):
       {.passL: "-lglew32 -lopengl32".}
     elif defined(linux):
       {.passL: "-lGLEW -lGL".}
+when defined(macosx):
+  #For all macos version, Not require install x11-nim 
+  {.pragma: ogl, header: "<OpenGL/gl3.h>".}
+  {.passL: "-framework OpenGL -framework Cocoa".}
 elif defined(ios):
   {.pragma: ogl.}
   {.pragma: oglx.}
