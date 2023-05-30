@@ -71,13 +71,13 @@ const
   GLX_TRANSPARENT_INDEX_EXT* = 0x00008009
 
 type                          # From XLib:
-  XPixmap* = TXID
-  XFont* = TXID
-  XColormap* = TXID
+  XPixmap* = XID
+  XFont* = XID
+  XColormap* = XID
   GLXContext* = pointer
-  GLXPixmap* = TXID
-  GLXDrawable* = TXID
-  GLXContextID* = TXID
+  GLXPixmap* = XID
+  GLXDrawable* = XID
+  GLXContextID* = XID
   TXPixmap* = XPixmap
   TXFont* = XFont
   TXColormap* = XColormap
